@@ -1,0 +1,1148 @@
+/* ========================================
+   The Portfolio Shift - Dark Mode + Yellow
+   Center-aligned, Mega Typography
+   ======================================== */
+
+/* ===== CSS Variables ===== */
+:root {
+    --black: #0A0A0A;
+    --white: #FFFFFF;
+    --off-white: #F8F7F5;
+    --yellow: #FFD600;
+    --gray: #888888;
+    --dark-gray: #1A1A1A;
+
+    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-sans: 'Pretendard', -apple-system, sans-serif;
+
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ===== Reset ===== */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-sans);
+    background: var(--off-white);
+    color: var(--black);
+    overflow-x: hidden;
+}
+
+/* ===== Navigation Dots ===== */
+.nav-dots {
+    position: fixed;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    z-index: 1000;
+    mix-blend-mode: difference;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1px solid var(--white);
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s var(--ease-out);
+    opacity: 0.4;
+}
+
+.dot:hover {
+    opacity: 1;
+    transform: scale(1.5);
+}
+
+.dot.active {
+    background: var(--white);
+    opacity: 1;
+}
+
+.dot-divider {
+    width: 1px;
+    height: 24px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 8px 0;
+}
+
+/* ===== Slides ===== */
+.slides-container {
+    width: 100%;
+}
+
+.slide {
+    width: 100%;
+    height: 100vh;
+    scroll-snap-align: start;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Slide Variants */
+.slide-light {
+    background: var(--off-white);
+    color: var(--black);
+}
+
+.slide-dark {
+    background: var(--black);
+    color: var(--white);
+    border-bottom: 1px solid #2A2A2A;
+}
+
+.slide-yellow {
+    background: var(--yellow);
+    color: var(--black);
+}
+
+/* ===== Geometric Elements (Graphic Design Style) ===== */
+/* Golden Ratio: 61.8% / 38.2% positioning */
+.geo-elements {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.geo-circle {
+    position: absolute;
+    border: 1px solid var(--yellow);
+    border-radius: 50%;
+    opacity: 0.7;
+}
+
+/* Large circle at golden ratio intersection */
+.geo-circle--large {
+    width: 50vw;
+    height: 50vw;
+    max-width: 600px;
+    max-height: 600px;
+    top: 38.2%;
+    /* Golden ratio */
+    left: 61.8%;
+    /* Golden ratio */
+    transform: translate(-50%, -50%);
+    animation: geoRotateSlow 60s linear infinite;
+}
+
+/* Hero circle - centered, large, bold stroke with breathing animation */
+.geo-circle--hero {
+    width: 70vw;
+    height: 70vw;
+    max-width: 800px;
+    max-height: 800px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-width: 2px;
+    opacity: 0.8;
+    animation: heroCircleBreath 8s ease-in-out infinite;
+}
+
+@keyframes heroCircleBreath {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        border-width: 2px;
+        opacity: 0.7;
+    }
+
+    25% {
+        transform: translate(-50%, -50%) scale(1.08);
+        border-width: 3px;
+        opacity: 0.9;
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(0.95);
+        border-width: 1px;
+        opacity: 0.6;
+    }
+
+    75% {
+        transform: translate(-50%, -50%) scale(1.05);
+        border-width: 4px;
+        opacity: 0.85;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        border-width: 2px;
+        opacity: 0.7;
+    }
+}
+
+/* Small circle at inverse golden ratio */
+.geo-circle--small {
+    width: 6vw;
+    height: 6vw;
+    max-width: 80px;
+    max-height: 80px;
+    top: 23.6%;
+    /* 38.2% * 0.618 */
+    left: 38.2%;
+    /* Golden ratio */
+    opacity: 0.5;
+    animation: geoPulse 4s ease-in-out infinite;
+}
+
+.geo-line {
+    position: absolute;
+    background: var(--yellow);
+    opacity: 0.4;
+}
+
+/* Diagonal line at exact 45 degrees */
+.geo-line--diagonal {
+    width: 1px;
+    height: 60vh;
+    top: 15%;
+    left: 38.2%;
+    /* Golden ratio */
+    transform: rotate(45deg);
+    transform-origin: top center;
+}
+
+/* Horizontal line at golden ratio height */
+.geo-line--horizontal {
+    width: 23.6vw;
+    /* 38.2% * 0.618 */
+    height: 1px;
+    top: 61.8%;
+    /* Golden ratio */
+    left: 61.8%;
+    /* Golden ratio */
+}
+
+/* Falling line for GRAVITY slide - 45deg downward */
+.geo-line--fall {
+    width: 2px;
+    height: 80vh;
+    top: 0;
+    left: 70%;
+    transform: rotate(45deg);
+    transform-origin: top center;
+    opacity: 0.6;
+}
+
+@keyframes geoRotateSlow {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+@keyframes geoPulse {
+
+    0%,
+    100% {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.6;
+        transform: scale(1.05);
+    }
+}
+
+/* ===== Background Image Slides ===== */
+.slide-with-bg {
+    position: relative;
+}
+
+.bg-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+}
+
+.bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    opacity: 0.5;
+}
+
+.bg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.bg-overlay--dark {
+    background: rgba(10, 10, 10, 0.6);
+}
+
+.bg-overlay--light {
+    background: rgba(248, 247, 245, 0.7);
+}
+
+.bg-overlay--yellow {
+    background: rgba(255, 214, 0, 0.85);
+}
+
+.slide-with-bg .slide-center,
+.slide-with-bg .slide-bottom {
+    z-index: 10;
+}
+
+/* ===== Slide Layout ===== */
+.slide-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex: 1;
+}
+
+.slide-bottom {
+    position: absolute;
+    bottom: 60px;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+/* ===== Typography ===== */
+.mega-text {
+    font-family: var(--font-serif);
+    font-size: clamp(80px, 15vw, 240px);
+    font-weight: 700;
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+}
+
+.chapter-label {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    opacity: 0.5;
+}
+
+.desc {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    opacity: 0.6;
+}
+
+/* Mixed Font Typography - Serif + Sans combination */
+.text-sans {
+    font-family: var(--font-sans);
+}
+
+.text-serif {
+    font-family: var(--font-serif);
+}
+
+/* ===== Info Grid (for content slides) ===== */
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px 80px;
+    max-width: 800px;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+}
+
+.info-number {
+    font-family: var(--font-serif);
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--yellow);
+    line-height: 1;
+    margin-bottom: 12px;
+}
+
+.info-title {
+    font-family: var(--font-sans);
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--white);
+}
+
+.slide-with-bg .bg-overlay--light+.slide-center .info-title {
+    color: var(--black);
+}
+
+/* ===== Process Flow (horizontal circles) ===== */
+.process-flow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 40px;
+}
+
+.process-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.process-circle {
+    width: 320px;
+    height: 320px;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 20px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+/* SVG stroke animation */
+.circle-stroke {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.circle-stroke circle {
+    fill: none;
+    stroke: var(--yellow);
+    stroke-width: 1;
+    stroke-dasharray: 301.6;
+    /* 2 * PI * 48 */
+    stroke-dashoffset: 301.6;
+    animation: strokeDraw 3s ease-in-out infinite;
+}
+
+.process-step:nth-child(1) .circle-stroke circle {
+    animation-delay: 0s;
+    animation-duration: 2.5s;
+}
+
+.process-step:nth-child(2) .circle-stroke circle {
+    animation-delay: 0.7s;
+    animation-duration: 3.2s;
+}
+
+.process-step:nth-child(3) .circle-stroke circle {
+    animation-delay: 0.3s;
+    animation-duration: 2.8s;
+}
+
+.process-step:nth-child(4) .circle-stroke circle {
+    animation-delay: 1.1s;
+    animation-duration: 3.5s;
+}
+
+@keyframes strokeDraw {
+    0% {
+        stroke-dashoffset: 301.6;
+        opacity: 0.3;
+    }
+
+    50% {
+        stroke-dashoffset: 0;
+        opacity: 1;
+    }
+
+    100% {
+        stroke-dashoffset: -301.6;
+        opacity: 0.3;
+    }
+}
+
+.circle-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    z-index: 1;
+}
+
+.process-circle:hover {
+    background: rgba(255, 214, 0, 0.1);
+    transform: scale(1.05);
+}
+
+.process-num {
+    font-family: var(--font-serif);
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--yellow);
+    line-height: 1;
+}
+
+.process-label {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--white);
+    text-align: center;
+    line-height: 1.4;
+}
+
+/* ===== Site Grid (for reference sites) ===== */
+.site-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 60px 100px;
+    max-width: 900px;
+}
+
+.site-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.site-name {
+    font-family: var(--font-serif);
+    font-size: 56px;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 12px;
+}
+
+.site-desc {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    font-weight: 400;
+    opacity: 0.7;
+}
+
+/* ===== Reference Card Grid ===== */
+.ref-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.ref-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    border-right: 1px solid rgba(255, 255, 255, 0.15);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.ref-card:nth-child(4),
+.ref-card:nth-child(8) {
+    border-right: none;
+}
+
+.ref-card:nth-child(n+5) {
+    border-bottom: none;
+}
+
+.ref-card:hover {
+    background: rgba(255, 214, 0, 0.08);
+}
+
+.ref-logo {
+    width: 32px;
+    height: 32px;
+    margin-bottom: 16px;
+}
+
+.ref-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    transition: filter 0.3s ease;
+}
+
+.ref-card:hover .ref-logo img {
+    filter: brightness(0) saturate(100%) invert(83%) sepia(47%) saturate(1000%) hue-rotate(2deg) brightness(103%) contrast(104%);
+}
+
+.ref-name {
+    font-family: var(--font-sans);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 8px;
+}
+
+.ref-desc {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.ref-url {
+    font-family: var(--font-sans);
+    font-size: 10px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.3);
+    margin-top: 12px;
+}
+
+/* ===== Colors ===== */
+.text-yellow {
+    color: var(--yellow);
+}
+
+.text-white {
+    color: var(--white);
+}
+
+.text-black {
+    color: var(--black);
+}
+
+/* ===== Animations ===== */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+}
+
+.slide.visible .fade-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.delay-1 {
+    transition-delay: 0.15s;
+}
+
+.delay-2 {
+    transition-delay: 0.3s;
+}
+
+.delay-3 {
+    transition-delay: 0.45s;
+}
+
+/* Restore opacity for desc in visible state */
+.slide.visible .desc.fade-in {
+    opacity: 0.6;
+}
+
+.slide.visible .chapter-label.fade-in {
+    opacity: 0.5;
+}
+
+/* ===== Particle Canvas ===== */
+.particle-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* ===== Per-Character Animation ===== */
+.char {
+    display: inline-block;
+    opacity: 0;
+    transform: translate(var(--rx, 0), var(--ry, 0)) rotate(var(--rr, 0deg));
+    animation: charReveal 0.8s var(--ease-out) forwards;
+    animation-delay: calc(var(--i) * 0.05s);
+}
+
+@keyframes charReveal {
+    0% {
+        opacity: 0;
+        transform: translate(var(--rx, 0), var(--ry, 0)) rotate(var(--rr, 0deg)) scale(0.5);
+    }
+
+    60% {
+        opacity: 1;
+        transform: translate(0, 0) rotate(0deg) scale(1.1);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(0, 0) rotate(0deg) scale(1);
+    }
+}
+
+/* Continuous per-char float with mouse parallax */
+.slide.visible .char {
+    animation: charReveal 0.8s var(--ease-out) forwards, charFloat 3s ease-in-out infinite;
+    animation-delay: calc(var(--i) * 0.05s), calc(var(--i) * 0.1s + 0.8s);
+}
+
+@keyframes charFloat {
+
+    0%,
+    100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+
+    25% {
+        transform: translate(calc(var(--mouse-x, 0) * 5px), calc(var(--mouse-y, 0) * 3px)) rotate(calc(var(--i) * 0.5deg));
+    }
+
+    50% {
+        transform: translate(calc(var(--mouse-x, 0) * -3px + 2px), calc(var(--mouse-y, 0) * -2px - 5px)) rotate(calc(var(--i) * -0.3deg));
+    }
+
+    75% {
+        transform: translate(calc(var(--mouse-x, 0) * 4px - 1px), calc(var(--mouse-y, 0) * 4px + 2px)) rotate(calc(var(--i) * 0.2deg));
+    }
+}
+
+/* Special slide-specific character behaviors */
+
+/* GRAVITY - Heavy, falling, pulled down */
+#slide-2.visible .char {
+    animation: charReveal 0.8s var(--ease-out) forwards, charGravityFall 3s ease-in-out infinite;
+    animation-delay: calc(var(--i) * 0.05s), calc(var(--i) * 0.2s + 0.8s);
+}
+
+@keyframes charGravityFall {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        filter: blur(0);
+    }
+
+    30% {
+        transform: translateY(15px) rotate(calc((var(--i) - 4) * 2deg));
+    }
+
+    60% {
+        transform: translateY(8px) rotate(calc((var(--i) - 4) * -1deg));
+    }
+
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+}
+
+/* ANTIGRAVITY - Zero-gravity scatter, characters drift apart */
+#slide-3.visible .char {
+    animation: charReveal 0.8s var(--ease-out) forwards, charZeroGravityScatter 8s ease-in-out infinite;
+    animation-delay: calc(var(--i) * 0.08s), calc(var(--i) * 0.3s + 0.8s);
+}
+
+@keyframes charZeroGravityScatter {
+    0% {
+        transform: translate(0, 0) rotate(0deg) scale(1);
+        opacity: 1;
+    }
+
+    25% {
+        transform: translate(calc((var(--i) - 5) * 8px), calc((var(--i) - 5) * -6px)) rotate(calc((var(--i) - 5) * 4deg)) scale(1.02);
+        opacity: 1;
+    }
+
+    50% {
+        transform: translate(calc((var(--i) - 5) * 15px), calc((var(--i) - 5) * 10px)) rotate(calc((var(--i) - 5) * -6deg)) scale(0.98);
+        opacity: 0.9;
+    }
+
+    75% {
+        transform: translate(calc((var(--i) - 5) * 10px), calc((var(--i) - 5) * -8px)) rotate(calc((var(--i) - 5) * 5deg)) scale(1.01);
+        opacity: 0.95;
+    }
+
+    100% {
+        transform: translate(0, 0) rotate(0deg) scale(1);
+        opacity: 1;
+    }
+}
+
+/* ===== RGB Glitch Effect ===== */
+.glitch-rgb {
+    position: relative;
+    animation: rgbGlitch 0.3s steps(2) infinite;
+}
+
+@keyframes rgbGlitch {
+    0% {
+        text-shadow:
+            -5px 0 #f00,
+            5px 0 #0ff;
+    }
+
+    25% {
+        text-shadow:
+            5px 0 #f00,
+            -5px 0 #0ff;
+    }
+
+    50% {
+        text-shadow:
+            -3px -2px #f00,
+            3px 2px #0ff;
+    }
+
+    75% {
+        text-shadow:
+            3px 2px #f00,
+            -3px -2px #0ff;
+    }
+
+    100% {
+        text-shadow:
+            -5px 0 #f00,
+            5px 0 #0ff;
+    }
+}
+
+/* Alternative simpler zero-gravity using multiple transforms */
+#slide-3.visible .mega-text .char:nth-child(odd) {
+    animation: charReveal 0.8s var(--ease-out) forwards, charFloatA 5s ease-in-out infinite;
+    animation-delay: calc(var(--i) * 0.08s), calc(var(--i) * 0.25s + 0.8s);
+}
+
+#slide-3.visible .mega-text .char:nth-child(even) {
+    animation: charReveal 0.8s var(--ease-out) forwards, charFloatB 4.5s ease-in-out infinite;
+    animation-delay: calc(var(--i) * 0.08s), calc(var(--i) * 0.2s + 0.8s);
+}
+
+@keyframes charFloatA {
+
+    0%,
+    100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+
+    25% {
+        transform: translate(20px, -15px) rotate(5deg);
+    }
+
+    50% {
+        transform: translate(-10px, -25px) rotate(-3deg);
+    }
+
+    75% {
+        transform: translate(15px, -8px) rotate(2deg);
+    }
+}
+
+@keyframes charFloatB {
+
+    0%,
+    100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+
+    25% {
+        transform: translate(-15px, -20px) rotate(-4deg);
+    }
+
+    50% {
+        transform: translate(12px, -30px) rotate(6deg);
+    }
+
+    75% {
+        transform: translate(-8px, -12px) rotate(-2deg);
+    }
+}
+
+/* 50MB PDF - Pulse with urgency/weight */
+#slide-1.visible .char {
+    animation: charReveal 0.8s var(--ease-out) forwards, charPressure 2s ease-in-out infinite;
+    animation-delay: calc(var(--i) * 0.04s), calc(var(--i) * 0.1s + 0.8s);
+}
+
+@keyframes charPressure {
+
+    0%,
+    100% {
+        transform: scale(1) translateY(0);
+    }
+
+    50% {
+        transform: scale(1.08) translateY(3px);
+    }
+}
+
+/* START - Subtle pulse energy */
+#slide-10.visible .char {
+    animation: charReveal 0.8s var(--ease-out) forwards, charPulse 2s ease-in-out infinite;
+    animation-delay: calc(var(--i) * 0.05s), calc(var(--i) * 0.1s + 0.8s);
+}
+
+@keyframes charPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.03);
+    }
+}
+
+/* DATA FIRST - Structured, organized pop */
+#slide-4.visible .char {
+    animation: charReveal 0.8s var(--ease-out) forwards, charData 3s ease-in-out infinite;
+    animation-delay: calc(var(--i) * 0.06s), calc(var(--i) * 0.15s + 0.8s);
+}
+
+@keyframes charData {
+
+    0%,
+    100% {
+        transform: translateY(0) scale(1);
+    }
+
+    50% {
+        transform: translateY(-5px) scale(1.02);
+    }
+}
+
+/* FOLDER - Opening, expanding feel */
+#slide-5.visible .char {
+    animation: charReveal 0.8s var(--ease-out) forwards, charOpen 2.5s ease-in-out infinite;
+    animation-delay: calc(var(--i) * 0.05s), calc(var(--i) * 0.12s + 0.8s);
+}
+
+@keyframes charOpen {
+
+    0%,
+    100% {
+        transform: translateX(0) scale(1);
+        letter-spacing: inherit;
+    }
+
+    50% {
+        transform: translateX(calc((var(--i) - 6) * 3px)) scale(1.03);
+    }
+}
+
+/* VISUAL REFERENCE - Slight rotation, artistic */
+#slide-6.visible .char {
+    animation: charReveal 0.8s var(--ease-out) forwards, charArtistic 4s ease-in-out infinite;
+    animation-delay: calc(var(--i) * 0.07s), calc(var(--i) * 0.18s + 0.8s);
+}
+
+@keyframes charArtistic {
+
+    0%,
+    100% {
+        transform: rotate(0deg) translateY(0);
+    }
+
+    25% {
+        transform: rotate(calc((var(--i) - 7) * 1deg)) translateY(-4px);
+    }
+
+    75% {
+        transform: rotate(calc((var(--i) - 7) * -0.5deg)) translateY(2px);
+    }
+}
+
+/* ===== Looping Motion Animations ===== */
+
+/* Slide 1: Gentle Float */
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+#slide-0 .mega-text {
+    animation: float 4s ease-in-out infinite;
+}
+
+/* Slide 2: Pulse Scale */
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.03);
+    }
+}
+
+#slide-1 .mega-text {
+    animation: pulse 2.5s ease-in-out infinite;
+}
+
+/* Slide 3: Subtle Shake (Gravity) */
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px);
+    }
+
+    75% {
+        transform: translateX(5px);
+    }
+}
+
+#slide-2 .mega-text {
+    animation: shake 3s ease-in-out infinite;
+}
+
+/* Slide 4: Rise Up (Antigravity) */
+@keyframes rise {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-25px);
+    }
+}
+
+#slide-3 .mega-text {
+    animation: rise 3s ease-in-out infinite;
+}
+
+/* Slide 5: Breath */
+@keyframes breath {
+
+    0%,
+    100% {
+        letter-spacing: -0.03em;
+    }
+
+    50% {
+        letter-spacing: 0.02em;
+    }
+}
+
+#slide-4 .mega-text {
+    animation: breath 4s ease-in-out infinite;
+}
+
+/* Slide 6: Bounce */
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    40% {
+        transform: translateY(-20px);
+    }
+
+    60% {
+        transform: translateY(-10px);
+    }
+}
+
+#slide-5 .mega-text {
+    animation: bounce 2s ease-in-out infinite;
+}
+
+/* Slide 7: Wave (per-line stagger effect via pseudo) */
+@keyframes wave {
+
+    0%,
+    100% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(-1deg);
+    }
+
+    75% {
+        transform: rotate(1deg);
+    }
+}
+
+#slide-6 .mega-text {
+    animation: wave 4s ease-in-out infinite;
+    transform-origin: center center;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+    .mega-text {
+        font-size: clamp(48px, 12vw, 120px);
+    }
+
+    .nav-dots {
+        right: 20px;
+    }
+
+    .slide-bottom {
+        bottom: 40px;
+    }
+
+    .desc {
+        font-size: 14px;
+        padding: 0 24px;
+    }
+}
