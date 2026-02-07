@@ -820,21 +820,21 @@ body {
 }
 
 /* Slide 16: PUBLISH - Explode from zero with elastic overshoot */
-#slide-17 .mega-text.fade-in {
+#slide-20 .mega-text.fade-in {
     transform: scale(0) translateY(0);
     transition: opacity 0.1s ease, transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-#slide-17.visible .mega-text.fade-in {
+#slide-20.visible .mega-text.fade-in {
     transform: scale(1) translateY(0);
 }
 
 /* Slide 19: START - Zoom rush from far with blur clear */
-#slide-20 .mega-text.fade-in {
+#slide-24 .mega-text.fade-in {
     transform: scale(5) translateY(0);
     filter: blur(30px);
     transition: opacity 0.2s ease, transform 1.5s cubic-bezier(0.16, 1, 0.3, 1), filter 1s ease;
 }
-#slide-20.visible .mega-text.fade-in {
+#slide-24.visible .mega-text.fade-in {
     transform: scale(1) translateY(0);
     filter: blur(0);
 }
@@ -1786,7 +1786,7 @@ body {
 }
 
 /* PUBLISH - Chars explode outward from center like deployment */
-#slide-17.visible .char {
+#slide-20.visible .char {
     animation: charLaunch 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards, charOrbit 5s ease-in-out infinite;
     animation-delay: calc(var(--i) * 0.06s), calc(var(--i) * 0.15s + 1s);
 }
@@ -1804,7 +1804,7 @@ body {
 }
 
 /* START - Chars pulse with energy like a heartbeat */
-#slide-20.visible .char {
+#slide-24.visible .char {
     animation: charHeartbeat 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards, charEnergy 2s ease-in-out infinite;
     animation-delay: calc(var(--i) * 0.04s), calc(var(--i) * 0.08s + 0.6s);
 }
@@ -1852,7 +1852,7 @@ body {
     60% { letter-spacing: 0.1em; transform: scale(1.01); }
 }
 
-#slide-17 .mega-text {
+#slide-20 .mega-text {
     animation: broadcastPulse 4s ease-in-out infinite;
 }
 
@@ -1865,7 +1865,7 @@ body {
     40% { transform: scale(1); }
 }
 
-#slide-20 .mega-text {
+#slide-24 .mega-text {
     animation: heartbeat 2s ease-in-out infinite;
 }
 
