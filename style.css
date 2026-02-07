@@ -1074,104 +1074,41 @@ body {
 }
 
 /* ===== CH.04: PRD / Plan First ===== */
-.prd-explain {
+.prd-lines {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    width: 100vw;
-    height: 100vh;
-    padding: 60px clamp(40px, 6vw, 100px) 100px;
-    gap: clamp(60px, 8vw, 160px);
-}
-
-.prd-col {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.prd-doc {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 12px;
-    padding: clamp(24px, 3vw, 48px);
-    position: relative;
-}
-
-.prd-doc::before {
-    content: 'PRD.md';
-    position: absolute;
-    top: -10px;
-    left: 20px;
-    font-family: var(--font-sans);
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    color: var(--yellow);
-    background: var(--black);
-    padding: 0 8px;
+    gap: 4px;
+    margin-top: clamp(32px, 4vh, 56px);
 }
 
 .prd-line {
     font-family: var(--font-sans);
-    font-size: clamp(16px, 2vw, 24px);
+    font-size: clamp(15px, 1.8vw, 22px);
     font-weight: 600;
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.7);
     opacity: 0;
-    transform: translateX(-30px);
-    transition: all 0.6s var(--ease-out);
-    transition-delay: calc(var(--idx) * 0.1s + 0.3s);
+    transform: translateY(16px);
+    transition: all 0.5s var(--ease-out);
+    transition-delay: calc(var(--idx) * 0.12s + 0.6s);
+    margin: 0;
 }
 
 .slide.visible .prd-line {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateY(0);
 }
 
 .prd-hash {
     color: var(--yellow);
     font-weight: 700;
-    margin-right: 6px;
+    margin-right: 4px;
+    font-family: 'SF Mono', 'Fira Code', monospace;
 }
 
-.prd-line.prd-body {
+.prd-dim {
     font-weight: 400;
-    font-size: clamp(14px, 1.6vw, 20px);
-    color: rgba(255, 255, 255, 0.4);
-    padding-left: 24px;
-}
-
-.prd-title {
-    font-family: var(--font-serif);
-    font-size: clamp(60px, 10vw, 160px);
-    font-weight: 700;
-    color: var(--white);
-    line-height: 0.95;
-    letter-spacing: -0.02em;
-}
-
-.prd-sub {
-    font-family: var(--font-sans);
-    font-size: clamp(16px, 1.8vw, 24px);
-    font-weight: 400;
-    color: rgba(255, 255, 255, 0.5);
-    line-height: 1.7;
-    margin-top: 20px;
-}
-
-@media (max-width: 768px) {
-    .prd-explain {
-        flex-direction: column;
-        padding: 40px 24px 80px;
-        gap: 32px;
-    }
-
-    .prd-title {
-        font-size: 48px;
-    }
+    color: rgba(255, 255, 255, 0.3);
 }
 
 /* ===== CH.05: Git & GitHub Explain ===== */

@@ -764,7 +764,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'slide-16': { shape: 'circle', physics: 'pulse', color: 'white', count: 15, sizeMin: 1, sizeMax: 3 },
         'slide-17': { shape: 'triangleOutline', physics: 'orbit', color: 'yellow', count: 20, sizeMin: 2, sizeMax: 5 },
         'slide-18': { shape: 'circle', physics: 'rise', color: 'white', count: 25, sizeMin: 1.5, sizeMax: 4 },
-        'slide-20': { shape: 'squareOutline', physics: 'float', color: 'white', count: 20, sizeMin: 1, sizeMax: 3 },
+        'slide-19': { shape: 'squareOutline', physics: 'float', color: 'white', count: 20, sizeMin: 1, sizeMax: 3 },
         'slide-20': { shape: 'circle', physics: 'rise', color: 'black', count: 30, sizeMin: 1.5, sizeMax: 4 }
     };
 
