@@ -1341,10 +1341,15 @@ body {
     align-items: baseline;
     gap: clamp(24px, 4vw, 60px);
     padding: clamp(6px, 1.2vh, 16px) 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     opacity: 0;
     transform: translateX(-60px);
     transition: all 0.7s var(--ease-out);
     transition-delay: calc(var(--idx) * 0.15s + 0.2s);
+}
+
+.anatomy-row:last-child {
+    border-bottom: none;
 }
 
 .slide.visible .anatomy-row {
