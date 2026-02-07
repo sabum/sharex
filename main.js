@@ -760,11 +760,12 @@ document.addEventListener('DOMContentLoaded', () => {
         'slide-12': { shape: 'triangle', physics: 'float', color: 'white', count: 20, sizeMin: 1, sizeMax: 3 },
         'slide-13': { shape: 'square', physics: 'drift', color: 'yellow', count: 25, sizeMin: 1, sizeMax: 2 },
         'slide-14': { shape: 'circleOutline', physics: 'rise', color: 'white', count: 30, sizeMin: 2, sizeMax: 5 },
-        'slide-15': { shape: 'circle', physics: 'pulse', color: 'white', count: 15, sizeMin: 1, sizeMax: 3 },
-        'slide-16': { shape: 'triangleOutline', physics: 'orbit', color: 'yellow', count: 20, sizeMin: 2, sizeMax: 5 },
-        'slide-17': { shape: 'circle', physics: 'rise', color: 'white', count: 25, sizeMin: 1.5, sizeMax: 4 },
-        'slide-18': { shape: 'squareOutline', physics: 'float', color: 'white', count: 20, sizeMin: 1, sizeMax: 3 },
-        'slide-19': { shape: 'circle', physics: 'rise', color: 'black', count: 30, sizeMin: 1.5, sizeMax: 4 }
+        'slide-15': { shape: 'squareOutline', physics: 'drift', color: 'yellow', count: 20, sizeMin: 1, sizeMax: 3 },
+        'slide-16': { shape: 'circle', physics: 'pulse', color: 'white', count: 15, sizeMin: 1, sizeMax: 3 },
+        'slide-17': { shape: 'triangleOutline', physics: 'orbit', color: 'yellow', count: 20, sizeMin: 2, sizeMax: 5 },
+        'slide-18': { shape: 'circle', physics: 'rise', color: 'white', count: 25, sizeMin: 1.5, sizeMax: 4 },
+        'slide-20': { shape: 'squareOutline', physics: 'float', color: 'white', count: 20, sizeMin: 1, sizeMax: 3 },
+        'slide-20': { shape: 'circle', physics: 'rise', color: 'black', count: 30, sizeMin: 1.5, sizeMax: 4 }
     };
 
     // Create particle system for each slide
@@ -804,8 +805,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     folderIconsSystem.start();
                 }
 
-                // Start cursor flock for START slide (slide-19)
-                if (slideId === 'slide-19') {
+                // Start cursor flock for START slide (slide-20)
+                if (slideId === 'slide-20') {
                     if (!cursorFlockSystem) {
                         cursorFlockSystem = new CursorFlockSystem(entry.target);
                     }
@@ -832,8 +833,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (slideId === 'slide-5' && folderIconsSystem) {
                     folderIconsSystem.stop();
                 }
-                // Stop cursor flock when leaving slide-19
-                if (slideId === 'slide-19' && cursorFlockSystem) {
+                // Stop cursor flock when leaving slide-20
+                if (slideId === 'slide-20' && cursorFlockSystem) {
                     cursorFlockSystem.stop();
                 }
             }

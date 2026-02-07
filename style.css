@@ -704,7 +704,8 @@ body {
 .slide:not(.visible) .prompt-text,
 .slide:not(.visible) .split-arrow,
 .slide:not(.visible) .split-line-svg,
-.slide:not(.visible) .connector-line {
+.slide:not(.visible) .connector-line,
+.slide:not(.visible) .prd-line {
     transition: none !important;
     animation: none !important;
 }
@@ -819,21 +820,21 @@ body {
 }
 
 /* Slide 16: PUBLISH - Explode from zero with elastic overshoot */
-#slide-16 .mega-text.fade-in {
+#slide-17 .mega-text.fade-in {
     transform: scale(0) translateY(0);
     transition: opacity 0.1s ease, transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-#slide-16.visible .mega-text.fade-in {
+#slide-17.visible .mega-text.fade-in {
     transform: scale(1) translateY(0);
 }
 
 /* Slide 19: START - Zoom rush from far with blur clear */
-#slide-19 .mega-text.fade-in {
+#slide-20 .mega-text.fade-in {
     transform: scale(5) translateY(0);
     filter: blur(30px);
     transition: opacity 0.2s ease, transform 1.5s cubic-bezier(0.16, 1, 0.3, 1), filter 1s ease;
 }
-#slide-19.visible .mega-text.fade-in {
+#slide-20.visible .mega-text.fade-in {
     transform: scale(1) translateY(0);
     filter: blur(0);
 }
@@ -1067,9 +1068,110 @@ body {
 }
 
 /* START - Subtle pulse energy */
-#slide-19.visible .char {
+#slide-20.visible .char {
     animation: charReveal 0.8s var(--ease-out) forwards, charPulse 2s ease-in-out infinite;
     animation-delay: calc(var(--i) * 0.05s), calc(var(--i) * 0.1s + 0.8s);
+}
+
+/* ===== CH.04: PRD / Plan First ===== */
+.prd-explain {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    padding: 60px clamp(40px, 6vw, 100px) 100px;
+    gap: clamp(60px, 8vw, 160px);
+}
+
+.prd-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.prd-doc {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: clamp(24px, 3vw, 48px);
+    position: relative;
+}
+
+.prd-doc::before {
+    content: 'PRD.md';
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: var(--yellow);
+    background: var(--black);
+    padding: 0 8px;
+}
+
+.prd-line {
+    font-family: var(--font-sans);
+    font-size: clamp(16px, 2vw, 24px);
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.8);
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: all 0.6s var(--ease-out);
+    transition-delay: calc(var(--idx) * 0.1s + 0.3s);
+}
+
+.slide.visible .prd-line {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.prd-hash {
+    color: var(--yellow);
+    font-weight: 700;
+    margin-right: 6px;
+}
+
+.prd-line.prd-body {
+    font-weight: 400;
+    font-size: clamp(14px, 1.6vw, 20px);
+    color: rgba(255, 255, 255, 0.4);
+    padding-left: 24px;
+}
+
+.prd-title {
+    font-family: var(--font-serif);
+    font-size: clamp(60px, 10vw, 160px);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+}
+
+.prd-sub {
+    font-family: var(--font-sans);
+    font-size: clamp(16px, 1.8vw, 24px);
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.5);
+    line-height: 1.7;
+    margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+    .prd-explain {
+        flex-direction: column;
+        padding: 40px 24px 80px;
+        gap: 32px;
+    }
+
+    .prd-title {
+        font-size: 48px;
+    }
 }
 
 /* ===== CH.05: Git & GitHub Explain ===== */
@@ -1781,7 +1883,7 @@ body {
 }
 
 /* PUBLISH - Chars explode outward from center like deployment */
-#slide-16.visible .char {
+#slide-17.visible .char {
     animation: charLaunch 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards, charOrbit 5s ease-in-out infinite;
     animation-delay: calc(var(--i) * 0.06s), calc(var(--i) * 0.15s + 1s);
 }
@@ -1799,7 +1901,7 @@ body {
 }
 
 /* START - Chars pulse with energy like a heartbeat */
-#slide-19.visible .char {
+#slide-20.visible .char {
     animation: charHeartbeat 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards, charEnergy 2s ease-in-out infinite;
     animation-delay: calc(var(--i) * 0.04s), calc(var(--i) * 0.08s + 0.6s);
 }
@@ -1847,7 +1949,7 @@ body {
     60% { letter-spacing: 0.1em; transform: scale(1.01); }
 }
 
-#slide-16 .mega-text {
+#slide-17 .mega-text {
     animation: broadcastPulse 4s ease-in-out infinite;
 }
 
@@ -1860,7 +1962,7 @@ body {
     40% { transform: scale(1); }
 }
 
-#slide-19 .mega-text {
+#slide-20 .mega-text {
     animation: heartbeat 2s ease-in-out infinite;
 }
 
