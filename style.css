@@ -690,6 +690,25 @@ body {
     opacity: 0.5;
 }
 
+/* ===== Instant Reset for Non-Visible Slides ===== */
+/* Disables transitions & animations when slide is offscreen.
+   Elements snap to hidden state instantly, so entrance motions
+   replay fresh every time a slide is navigated to. */
+.slide:not(.visible) .fade-in,
+.slide:not(.visible) .mega-text,
+.slide:not(.visible) .char,
+.slide:not(.visible) .git-step,
+.slide:not(.visible) .anatomy-row,
+.slide:not(.visible) .heavy-text,
+.slide:not(.visible) .light-text,
+.slide:not(.visible) .prompt-text,
+.slide:not(.visible) .split-arrow,
+.slide:not(.visible) .split-line-svg,
+.slide:not(.visible) .connector-line {
+    transition: none !important;
+    animation: none !important;
+}
+
 /* ===== Per-Slide Creative Entrances ===== */
 
 /* Chapter labels: Horizontal cursor-wipe reveal */
@@ -835,8 +854,6 @@ body {
     display: inline-block;
     opacity: 0;
     transform: translate(var(--rx, 0), var(--ry, 0)) rotate(var(--rr, 0deg));
-    animation: charReveal 0.8s var(--ease-out) forwards;
-    animation-delay: calc(var(--i) * 0.05s);
 }
 
 @keyframes charReveal {

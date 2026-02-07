@@ -821,6 +821,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     body.classList.remove('on-yellow');
                 }
             } else {
+                // Remove visible class so entrance animations reset and replay on re-entry
+                entry.target.classList.remove('visible');
+
                 // Stop particles when not visible
                 if (ps) {
                     ps.stop();
@@ -906,23 +909,8 @@ document.addEventListener('DOMContentLoaded', () => {
         document.documentElement.style.setProperty('--mouse-y', mouseY);
     });
 
-    // ===== Prompt Text Stagger Animation =====
-    const promptObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const texts = entry.target.querySelectorAll('.prompt-text');
-                texts.forEach((text, i) => {
-                    setTimeout(() => {
-                        text.style.opacity = '1';
-                        text.style.transform = 'translateY(0)';
-                    }, i * 150 + 300);
-                });
-            }
-        });
-    }, { threshold: 0.5 });
-
-    const promptSlide = document.getElementById('slide-15');
-    if (promptSlide) promptObserver.observe(promptSlide);
+    // Prompt text stagger is now handled via CSS .slide.visible transitions
+    // (removed JS observer that set inline styles, preventing CSS reset on re-entry)
 
     // ===== Initial State =====
     slides[0].classList.add('visible');
