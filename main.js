@@ -8,6 +8,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const dots = document.querySelectorAll('.dot');
     const body = document.body;
 
+    // ===== Centralized Resize Handler =====
+    const resizeHandlers = new Set();
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            resizeHandlers.forEach(fn => fn());
+        }, 100);
+    });
+
     // ===== Split Text into Characters =====
     function splitText() {
         document.querySelectorAll('.mega-text').forEach(el => {
@@ -42,13 +52,17 @@ document.addEventListener('DOMContentLoaded', () => {
                     return chars;
                 } else if (node.nodeType === 1) { // Element node
                     const tag = node.tagName.toLowerCase();
-                    const classes = node.className ? ` class="${node.className}"` : '';
+                    if (tag === 'br') return '<br>';
+                    // Preserve all attributes
+                    let attrs = '';
+                    for (const attr of node.attributes) {
+                        attrs += ` ${attr.name}="${attr.value}"`;
+                    }
                     let content = '';
                     node.childNodes.forEach(child => {
                         content += processNode(child);
                     });
-                    if (tag === 'br') return '<br>';
-                    return `<${tag}${classes}>${content}</${tag}>`;
+                    return `<${tag}${attrs}>${content}</${tag}>`;
                 }
                 return '';
             }
@@ -65,49 +79,58 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ===== Hugo-Style Tick Text Animation =====
     const tickChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*';
+    const tickAnimations = new Map(); // Track active tick animations
 
     function initTickText() {
         document.querySelectorAll('.tick-text').forEach(el => {
             const originalText = el.getAttribute('data-text') || el.textContent;
             el.setAttribute('data-text', originalText);
-
-            // Start the loop
-            tickTextLoop(el, originalText);
+            tickAnimations.set(el, { running: false, originalText });
         });
     }
 
-    function tickTextLoop(el, originalText) {
-        const duration = 2000; // Animation duration
-        const pause = 3000;    // Pause before next loop
+    function startTickText(el) {
+        const state = tickAnimations.get(el);
+        if (!state || state.running) return;
+        state.running = true;
+        tickTextLoop(el, state.originalText, state);
+    }
+
+    function stopTickText(el) {
+        const state = tickAnimations.get(el);
+        if (state) {
+            state.running = false;
+            if (state.timeoutId) clearTimeout(state.timeoutId);
+            el.textContent = state.originalText;
+        }
+    }
+
+    function tickTextLoop(el, originalText, state) {
+        const duration = 2000;
+        const pause = 3000;
         let startTime = null;
 
         function animate(timestamp) {
+            if (!state.running) return;
             if (!startTime) startTime = timestamp;
             const progress = (timestamp - startTime) / duration;
 
             if (progress < 1) {
-                // Scramble phase then resolve
                 let newText = '';
                 for (let i = 0; i < originalText.length; i++) {
                     const charProgress = progress * originalText.length;
                     if (i < charProgress - 1) {
-                        // Resolved character
                         newText += originalText[i];
-                    } else if (i < charProgress) {
-                        // Scrambling character
-                        newText += tickChars[Math.floor(Math.random() * tickChars.length)];
                     } else {
-                        // Random character
                         newText += tickChars[Math.floor(Math.random() * tickChars.length)];
                     }
                 }
                 el.textContent = newText;
                 requestAnimationFrame(animate);
             } else {
-                // Show original text
                 el.textContent = originalText;
-                // Wait and restart
-                setTimeout(() => {
+                state.timeoutId = setTimeout(() => {
+                    if (!state.running) return;
                     startTime = null;
                     requestAnimationFrame(animate);
                 }, pause);
@@ -117,40 +140,54 @@ document.addEventListener('DOMContentLoaded', () => {
         requestAnimationFrame(animate);
     }
 
-    // Initialize after a short delay
     setTimeout(initTickText, 500);
 
     // ===== Slot Machine Number Animation =====
     const slotNumbers = [5, 10, 20, 30, 50, 75, 100, 3, 8, 15, 25, 40, 60, 80];
+    const slotAnimations = new Map(); // Track active slot animations
 
     function initSlotNumbers() {
         document.querySelectorAll('.slot-number').forEach(el => {
-            slotNumberLoop(el);
+            slotAnimations.set(el, { running: false });
         });
     }
 
-    function slotNumberLoop(el) {
-        const spinDuration = 1500; // How long to spin
-        const pauseDuration = 2500; // Pause showing final number
+    function startSlotNumber(el) {
+        const state = slotAnimations.get(el);
+        if (!state || state.running) return;
+        state.running = true;
+        slotNumberLoop(el, state);
+    }
+
+    function stopSlotNumber(el) {
+        const state = slotAnimations.get(el);
+        if (state) {
+            state.running = false;
+            if (state.timeoutId) clearTimeout(state.timeoutId);
+        }
+    }
+
+    function slotNumberLoop(el, state) {
+        const spinDuration = 1500;
+        const pauseDuration = 2500;
         let startTime = null;
         let finalNumber = slotNumbers[Math.floor(Math.random() * slotNumbers.length)];
 
         function animate(timestamp) {
+            if (!state.running) return;
             if (!startTime) startTime = timestamp;
             const elapsed = timestamp - startTime;
 
             if (elapsed < spinDuration) {
-                // Spinning phase - show random numbers
-                const speed = Math.max(50, 150 - (elapsed / spinDuration) * 100); // Slow down
+                const speed = Math.max(50, 150 - (elapsed / spinDuration) * 100);
                 if (elapsed % speed < 20) {
                     el.textContent = slotNumbers[Math.floor(Math.random() * slotNumbers.length)];
                 }
                 requestAnimationFrame(animate);
             } else {
-                // Show final number
                 el.textContent = finalNumber;
-                // Wait and restart
-                setTimeout(() => {
+                state.timeoutId = setTimeout(() => {
+                    if (!state.running) return;
                     startTime = null;
                     finalNumber = slotNumbers[Math.floor(Math.random() * slotNumbers.length)];
                     requestAnimationFrame(animate);
@@ -161,7 +198,6 @@ document.addEventListener('DOMContentLoaded', () => {
         requestAnimationFrame(animate);
     }
 
-    // Initialize slot numbers
     setTimeout(initSlotNumbers, 500);
 
     // ===== Falling File Icons System (for FOLDER slide) =====
@@ -181,7 +217,8 @@ document.addEventListener('DOMContentLoaded', () => {
             // Icon types: simple shapes
             this.iconTypes = ['doc', 'doc', 'doc', 'folder', 'image', 'doc'];
 
-            window.addEventListener('resize', () => this.resize());
+            this._onResize = () => this.resize();
+            resizeHandlers.add(this._onResize);
         }
 
         resize() {
@@ -352,7 +389,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 this.mouse.y = e.clientY - rect.top;
             };
 
-            window.addEventListener('resize', () => this.resize());
+            this._onResize = () => this.resize();
+            resizeHandlers.add(this._onResize);
         }
 
         resize() {
@@ -365,7 +403,7 @@ document.addEventListener('DOMContentLoaded', () => {
             this.isRunning = true;
             this.resize();
 
-            const count = 480;
+            const count = 200;
             this.boids = [];
             for (let i = 0; i < count; i++) {
                 this.boids.push({
@@ -508,7 +546,8 @@ document.addEventListener('DOMContentLoaded', () => {
             container.appendChild(this.canvas);
             this.resize();
 
-            window.addEventListener('resize', () => this.resize());
+            this._onResize = () => this.resize();
+            resizeHandlers.add(this._onResize);
         }
 
         resize() {
@@ -813,6 +852,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     cursorFlockSystem.start();
                 }
 
+                // Start tick/slot animations only when their slide is visible
+                entry.target.querySelectorAll('.tick-text').forEach(el => startTickText(el));
+                entry.target.querySelectorAll('.slot-number').forEach(el => startSlotNumber(el));
+
                 const slideIndex = Array.from(slides).indexOf(entry.target);
                 updateActiveDot(slideIndex);
 
@@ -837,6 +880,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (slideId === 'slide-20' && cursorFlockSystem) {
                     cursorFlockSystem.stop();
                 }
+                // Stop tick/slot animations when slide leaves view
+                entry.target.querySelectorAll('.tick-text').forEach(el => stopTickText(el));
+                entry.target.querySelectorAll('.slot-number').forEach(el => stopSlotNumber(el));
             }
         });
     }, observerOptions);
@@ -918,8 +964,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const initialPs = particleSystems.get('slide-0');
     if (initialPs) initialPs.start(particleConfigs['slide-0']);
 
-    console.log('🚀 Portfolio Shift - 20 Slides Loaded');
-    console.log('✨ Shapes: circle, square, triangle + outlines');
-    console.log('🎯 Physics: float, gravity, rise, drift, orbit, pulse');
+    // ===== Ready =====
 });
 

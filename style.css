@@ -927,39 +927,6 @@ body {
     }
 }
 
-/* ANTIGRAVITY - Zero-gravity scatter, characters drift apart */
-#slide-3.visible .char {
-    animation: charReveal 0.8s var(--ease-out) forwards, charZeroGravityScatter 8s ease-in-out infinite;
-    animation-delay: calc(var(--i) * 0.08s), calc(var(--i) * 0.3s + 0.8s);
-}
-
-@keyframes charZeroGravityScatter {
-    0% {
-        transform: translate(0, 0) rotate(0deg) scale(1);
-        opacity: 1;
-    }
-
-    25% {
-        transform: translate(calc((var(--i) - 5) * 8px), calc((var(--i) - 5) * -6px)) rotate(calc((var(--i) - 5) * 4deg)) scale(1.02);
-        opacity: 1;
-    }
-
-    50% {
-        transform: translate(calc((var(--i) - 5) * 15px), calc((var(--i) - 5) * 10px)) rotate(calc((var(--i) - 5) * -6deg)) scale(0.98);
-        opacity: 0.9;
-    }
-
-    75% {
-        transform: translate(calc((var(--i) - 5) * 10px), calc((var(--i) - 5) * -8px)) rotate(calc((var(--i) - 5) * 5deg)) scale(1.01);
-        opacity: 0.95;
-    }
-
-    100% {
-        transform: translate(0, 0) rotate(0deg) scale(1);
-        opacity: 1;
-    }
-}
-
 /* ===== RGB Glitch Effect ===== */
 .glitch-rgb {
     position: relative;
@@ -1065,12 +1032,6 @@ body {
     50% {
         transform: scale(1.08) translateY(3px);
     }
-}
-
-/* START - Subtle pulse energy */
-#slide-20.visible .char {
-    animation: charReveal 0.8s var(--ease-out) forwards, charPulse 2s ease-in-out infinite;
-    animation-delay: calc(var(--i) * 0.05s), calc(var(--i) * 0.1s + 0.8s);
 }
 
 /* ===== CH.04: PRD / Plan First ===== */
@@ -2020,5 +1981,32 @@ body {
 
     .git-title {
         font-size: 48px;
+    }
+
+    .process-flow {
+        gap: 16px;
+        padding: 0 24px;
+    }
+
+    .process-circle {
+        width: 160px;
+        height: 160px;
+    }
+
+    .process-num {
+        font-size: 20px;
+    }
+
+    .process-label {
+        font-size: 11px;
+    }
+}
+
+/* ===== Reduced Motion ===== */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
     }
 }
