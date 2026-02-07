@@ -43,42 +43,46 @@ body {
 /* ===== Navigation Dots ===== */
 .nav-dots {
     position: fixed;
-    right: 40px;
+    right: 28px;
     top: 50%;
     transform: translateY(-50%);
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    align-items: center;
+    gap: 8px;
     z-index: 1000;
     mix-blend-mode: difference;
 }
 
 .dot {
-    width: 8px;
-    height: 8px;
+    width: 4px;
+    height: 4px;
     border-radius: 50%;
-    border: 1px solid var(--white);
-    background: transparent;
+    border: none;
+    background: var(--white);
     cursor: pointer;
-    transition: all 0.3s var(--ease-out);
-    opacity: 0.4;
+    transition: all 0.4s var(--ease-out);
+    opacity: 0.2;
+    padding: 0;
 }
 
 .dot:hover {
-    opacity: 1;
-    transform: scale(1.5);
+    opacity: 0.8;
+    transform: scale(2);
 }
 
 .dot.active {
-    background: var(--white);
     opacity: 1;
+    width: 4px;
+    height: 16px;
+    border-radius: 2px;
 }
 
 .dot-divider {
     width: 1px;
-    height: 24px;
-    background: rgba(255, 255, 255, 0.2);
-    margin: 8px 0;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.08);
+    margin: 2px 0;
 }
 
 /* ===== Slides ===== */
@@ -418,8 +422,8 @@ body {
     justify-content: center;
     gap: 40px;
     width: 100%;
-    max-width: 1200px;
-    padding: 0 40px;
+    max-width: 1500px;
+    padding: 0 60px;
 }
 
 .process-step {
@@ -917,9 +921,92 @@ body {
 }
 
 /* START - Subtle pulse energy */
-#slide-10.visible .char {
+#slide-19.visible .char {
     animation: charReveal 0.8s var(--ease-out) forwards, charPulse 2s ease-in-out infinite;
     animation-delay: calc(var(--i) * 0.05s), calc(var(--i) * 0.1s + 0.8s);
+}
+
+/* ===== CH.05: Git & GitHub Explain ===== */
+.git-explain {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    padding: 60px clamp(40px, 6vw, 100px) 100px;
+    gap: clamp(40px, 6vw, 120px);
+}
+
+.git-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.git-title {
+    font-family: var(--font-serif);
+    font-size: clamp(60px, 10vw, 160px);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1;
+    letter-spacing: -0.02em;
+}
+
+.git-sub {
+    font-family: var(--font-sans);
+    font-size: clamp(14px, 1.6vw, 22px);
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.4);
+    letter-spacing: 0.05em;
+    margin: 0;
+}
+
+.git-body {
+    font-family: var(--font-sans);
+    font-size: clamp(16px, 1.8vw, 24px);
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.55);
+    line-height: 1.7;
+    margin: 16px 0 0 0;
+}
+
+.git-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.git-step {
+    display: flex;
+    align-items: baseline;
+    gap: clamp(12px, 2vw, 24px);
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: all 0.6s var(--ease-out);
+    transition-delay: calc(var(--idx) * 0.15s + 0.5s);
+}
+
+.slide.visible .git-step {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.git-step-num {
+    font-family: var(--font-serif);
+    font-size: clamp(24px, 3vw, 40px);
+    font-weight: 700;
+    color: var(--yellow);
+    line-height: 1;
+}
+
+.git-step-text {
+    font-family: var(--font-sans);
+    font-size: clamp(15px, 1.6vw, 22px);
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.4;
 }
 
 @keyframes charPulse {
@@ -1127,6 +1214,484 @@ body {
     transform-origin: center center;
 }
 
+/* ===== CH.03: Typography Anatomy ===== */
+.typo-anatomy {
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    align-content: center;
+    width: 100vw;
+    height: 100vh;
+    padding: 60px clamp(40px, 8vw, 120px) 100px;
+    gap: 0;
+}
+
+.anatomy-row {
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-column: 1 / -1;
+    align-items: baseline;
+    gap: clamp(24px, 4vw, 60px);
+    padding: clamp(6px, 1.2vh, 16px) 0;
+    opacity: 0;
+    transform: translateX(-60px);
+    transition: all 0.7s var(--ease-out);
+    transition-delay: calc(var(--idx) * 0.15s + 0.2s);
+}
+
+.slide.visible .anatomy-row {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.anatomy-num {
+    font-family: var(--font-serif);
+    font-size: clamp(36px, 6.5vw, 100px);
+    font-weight: 700;
+    color: var(--yellow);
+    line-height: 1;
+}
+
+.anatomy-name {
+    font-family: var(--font-sans);
+    font-size: clamp(24px, 4.2vw, 60px);
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.anatomy-detail {
+    font-family: var(--font-sans);
+    font-size: clamp(13px, 1.4vw, 20px);
+    color: rgba(255, 255, 255, 0.3);
+    line-height: 1.5;
+    text-align: right;
+}
+
+/* Hover: number glows, name shifts */
+.anatomy-row:hover .anatomy-num {
+    text-shadow: 0 0 40px rgba(255, 214, 0, 0.3);
+    transition: text-shadow 0.3s ease;
+}
+
+.anatomy-row:hover .anatomy-name {
+    transform: translateX(8px);
+    transition: transform 0.3s var(--ease-out);
+}
+
+.anatomy-row:hover .anatomy-detail {
+    color: rgba(255, 255, 255, 0.6);
+    transition: color 0.3s ease;
+}
+
+/* ===== CH.03: Split Compare (Before/After) ===== */
+.split-compare {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.split-left,
+.split-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 60px;
+    height: 100%;
+}
+
+.split-label {
+    font-family: var(--font-serif);
+    font-size: clamp(16px, 2vw, 22px);
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.3);
+    margin-bottom: 50px;
+}
+
+.split-items {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.split-item {
+    font-family: var(--font-sans);
+    font-size: clamp(24px, 3.5vw, 42px);
+    font-weight: 600;
+    line-height: 1.2;
+    margin: 0;
+}
+
+/* BEFORE side - heavy, falling, blurred */
+.heavy-text {
+    color: rgba(255, 255, 255, 0.35);
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: all 0.6s var(--ease-out);
+}
+
+.slide.visible .heavy-text {
+    opacity: 1;
+    transform: translateY(0);
+    animation: heavyDrift 3s ease-in-out infinite;
+}
+
+@keyframes heavyDrift {
+    0%, 100% { transform: translateY(0); filter: blur(0); }
+    50% { transform: translateY(8px); filter: blur(1px); }
+}
+
+/* Stagger the heavy items */
+.slide.visible .heavy-text:nth-child(1) { animation-delay: 0s; transition-delay: 0.2s; }
+.slide.visible .heavy-text:nth-child(2) { animation-delay: 0.3s; transition-delay: 0.35s; }
+.slide.visible .heavy-text:nth-child(3) { animation-delay: 0.6s; transition-delay: 0.5s; }
+.slide.visible .heavy-text:nth-child(4) { animation-delay: 0.9s; transition-delay: 0.65s; }
+
+/* AFTER side - light, floating, bright */
+.light-text {
+    color: var(--white);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s var(--ease-out);
+}
+
+.slide.visible .light-text {
+    opacity: 1;
+    transform: translateY(0);
+    animation: lightFloat 3s ease-in-out infinite;
+}
+
+@keyframes lightFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+.slide.visible .light-text:nth-child(1) { animation-delay: 0.1s; transition-delay: 0.4s; }
+.slide.visible .light-text:nth-child(2) { animation-delay: 0.4s; transition-delay: 0.55s; }
+.slide.visible .light-text:nth-child(3) { animation-delay: 0.7s; transition-delay: 0.7s; }
+.slide.visible .light-text:nth-child(4) { animation-delay: 1.0s; transition-delay: 0.85s; }
+
+/* Divider */
+.split-divider {
+    width: 60px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.split-divider svg {
+    position: absolute;
+    top: 0;
+    width: 2px;
+    height: 100%;
+}
+
+.split-line-svg {
+    stroke: var(--yellow);
+    stroke-width: 1;
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+    transition: stroke-dashoffset 1.5s var(--ease-out) 0.2s;
+}
+
+.slide.visible .split-line-svg {
+    stroke-dashoffset: 0;
+}
+
+.split-arrow {
+    font-family: var(--font-serif);
+    font-size: 28px;
+    color: var(--yellow);
+    z-index: 1;
+    background: var(--black);
+    padding: 8px 0;
+    opacity: 0;
+    transform: scale(0.5);
+    transition: all 0.5s var(--ease-out) 0.8s;
+}
+
+.slide.visible .split-arrow {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* ===== CH.04: Terminal Cursor ===== */
+.terminal-cursor {
+    position: absolute;
+    bottom: 120px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 3px;
+    background: var(--yellow);
+    opacity: 0;
+    animation: cursorBlink 1s step-end infinite;
+}
+
+.slide.visible .terminal-cursor {
+    opacity: 1;
+}
+
+@keyframes cursorBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* VIBE CODING - Typewriter build character animation */
+#slide-13.visible .char {
+    animation: charTypewriter 0.15s steps(1) forwards;
+    animation-delay: calc(var(--i) * 0.08s);
+}
+
+@keyframes charTypewriter {
+    0% { opacity: 0; transform: translateY(0) scale(1); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ===== CH.04: Prompt Compare - Typography Only ===== */
+.prompt-compare {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    gap: 0;
+}
+
+.prompt-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: clamp(20px, 3vh, 36px);
+    padding: 80px clamp(40px, 5vw, 80px);
+}
+
+.prompt-label-text {
+    font-family: var(--font-sans);
+    font-size: clamp(11px, 1.1vw, 14px);
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.2);
+    margin: 0 0 8px 0;
+}
+
+.prompt-label-text.good {
+    color: rgba(255, 214, 0, 0.4);
+}
+
+.prompt-vs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-serif);
+    font-size: 28px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.06);
+    letter-spacing: 0.1em;
+    flex-shrink: 0;
+    width: 60px;
+}
+
+.prompt-text {
+    font-family: var(--font-sans);
+    line-height: 1.5;
+    margin: 0;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s var(--ease-out);
+}
+
+.prompt-text.bad {
+    font-size: clamp(20px, 2.8vw, 36px);
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.2);
+    text-decoration: line-through;
+    text-decoration-color: rgba(255, 68, 68, 0.3);
+    text-decoration-thickness: 2px;
+}
+
+.prompt-text.good {
+    font-size: clamp(18px, 2.2vw, 28px);
+    font-weight: 600;
+    color: var(--white);
+}
+
+/* Bad text: shake + blur */
+.slide.visible .prompt-text.bad {
+    opacity: 1;
+    transform: translateY(0);
+    animation: promptTextShake 4s ease-in-out infinite;
+}
+
+@keyframes promptTextShake {
+    0%, 45%, 100% { transform: translateX(0); filter: blur(0); }
+    10% { transform: translateX(-3px); }
+    20% { transform: translateX(3px); filter: blur(1px); }
+    30% { transform: translateX(-2px); filter: blur(0.5px); }
+}
+
+/* Good text: crisp glow */
+.slide.visible .prompt-text.good {
+    opacity: 1;
+    transform: translateY(0);
+    animation: promptTextGlow 3s ease-in-out infinite;
+}
+
+@keyframes promptTextGlow {
+    0%, 100% { text-shadow: 0 0 0 transparent; }
+    50% { text-shadow: 0 0 30px rgba(255, 214, 0, 0.12); }
+}
+
+/* Stagger prompt text */
+.slide.visible .prompt-bad .prompt-text:nth-child(2) { transition-delay: 0.1s; animation-delay: 0.1s; }
+.slide.visible .prompt-bad .prompt-text:nth-child(3) { transition-delay: 0.2s; animation-delay: 0.3s; }
+.slide.visible .prompt-bad .prompt-text:nth-child(4) { transition-delay: 0.3s; animation-delay: 0.5s; }
+.slide.visible .prompt-good .prompt-text:nth-child(2) { transition-delay: 0.4s; animation-delay: 0.2s; }
+.slide.visible .prompt-good .prompt-text:nth-child(3) { transition-delay: 0.5s; animation-delay: 0.4s; }
+.slide.visible .prompt-good .prompt-text:nth-child(4) { transition-delay: 0.6s; animation-delay: 0.6s; }
+
+/* ===== CH.05: Deploy Flow ===== */
+.deploy-flow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    width: 100%;
+    max-width: 1400px;
+    padding: 0 60px;
+}
+
+.deploy-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+}
+
+.deploy-circle {
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.deploy-circle:hover {
+    background: rgba(255, 214, 0, 0.1);
+    transform: scale(1.05);
+}
+
+.deploy-desc {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.5);
+    text-align: center;
+    max-width: 220px;
+    line-height: 1.5;
+}
+
+.deploy-connector {
+    width: 120px;
+    height: 2px;
+    flex-shrink: 0;
+    margin-bottom: 50px;
+}
+
+.deploy-connector svg {
+    width: 100%;
+    height: 100%;
+}
+
+.connector-line {
+    stroke: var(--yellow);
+    stroke-width: 1;
+    stroke-dasharray: 120;
+    stroke-dashoffset: 120;
+    transition: stroke-dashoffset 0.8s var(--ease-out);
+}
+
+.slide.visible .deploy-connector:nth-of-type(1) .connector-line {
+    stroke-dashoffset: 0;
+    transition-delay: 0.5s;
+}
+
+.slide.visible .deploy-connector:nth-of-type(2) .connector-line {
+    stroke-dashoffset: 0;
+    transition-delay: 1s;
+}
+
+/* ===== New Slide Per-Character Animations ===== */
+
+/* STRUCTURE - Letters build up like blocks, stacking from bottom */
+#slide-10.visible .char {
+    animation: charReveal 0.8s var(--ease-out) forwards, charBuild 3s ease-in-out infinite;
+    animation-delay: calc(var(--i) * 0.06s), calc(var(--i) * 0.15s + 0.8s);
+}
+
+@keyframes charBuild {
+    0%, 100% { transform: translateY(0) scale(1); }
+    30% { transform: translateY(-8px) scale(1.02); }
+    60% { transform: translateY(2px) scale(0.99); }
+}
+
+/* PUBLISH - Letters expand outward from center */
+#slide-16.visible .char {
+    animation: charReveal 0.8s var(--ease-out) forwards, charExpand 4s ease-in-out infinite;
+    animation-delay: calc(var(--i) * 0.05s), calc(var(--i) * 0.12s + 0.8s);
+}
+
+@keyframes charExpand {
+    0%, 100% { transform: translateX(0) scale(1); }
+    50% { transform: translateX(calc((var(--i) - 3) * 5px)) scale(1.04); }
+}
+
+/* ===== New Looping Motion Animations ===== */
+
+/* Slide 10: STRUCTURE - Letter spacing expands */
+@keyframes structureBreath {
+    0%, 100% { letter-spacing: -0.03em; }
+    50% { letter-spacing: 0.05em; }
+}
+
+#slide-10 .mega-text {
+    animation: structureBreath 4s ease-in-out infinite;
+}
+
+/* Slide 13: VIBE CODING - Gentle bounce */
+#slide-13 .mega-text {
+    animation: float 3.5s ease-in-out infinite;
+}
+
+/* Slide 16: PUBLISH - Expand outward */
+@keyframes expandPush {
+    0%, 100% { letter-spacing: -0.03em; transform: scale(1); }
+    50% { letter-spacing: 0.08em; transform: scale(1.02); }
+}
+
+#slide-16 .mega-text {
+    animation: expandPush 3s ease-in-out infinite;
+}
+
 /* ===== Responsive ===== */
 @media (max-width: 768px) {
     .mega-text {
@@ -1144,5 +1709,105 @@ body {
     .desc {
         font-size: 14px;
         padding: 0 24px;
+    }
+
+    .typo-anatomy {
+        grid-template-columns: auto 1fr;
+        padding: 0 24px;
+    }
+
+    .anatomy-row {
+        gap: 16px;
+        padding: 8px 0;
+    }
+
+    .anatomy-detail {
+        display: none;
+    }
+
+    .split-compare {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .split-left,
+    .split-right {
+        padding: 40px 30px;
+        height: auto;
+        flex: none;
+    }
+
+    .split-label {
+        margin-bottom: 24px;
+    }
+
+    .split-items {
+        gap: 16px;
+    }
+
+    .split-divider {
+        width: 100%;
+        height: 40px;
+        flex-direction: row;
+    }
+
+    .split-divider svg {
+        width: 100%;
+        height: 2px;
+        position: relative;
+    }
+
+    .split-item {
+        font-size: 20px;
+    }
+
+    .prompt-compare {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .prompt-col {
+        padding: 30px 24px;
+        gap: 14px;
+    }
+
+    .prompt-vs {
+        text-align: center;
+        width: 100%;
+        height: 30px;
+    }
+
+    .prompt-text.bad {
+        font-size: 18px;
+    }
+
+    .prompt-text.good {
+        font-size: 16px;
+    }
+
+    .deploy-flow {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .deploy-connector {
+        width: 2px;
+        height: 40px;
+        margin-bottom: 0;
+    }
+
+    .deploy-circle {
+        width: 180px;
+        height: 180px;
+    }
+
+    .git-explain {
+        flex-direction: column;
+        padding: 40px 24px 80px;
+        gap: 32px;
+    }
+
+    .git-title {
+        font-size: 48px;
     }
 }

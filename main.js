@@ -332,6 +332,166 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize falling icons for FOLDER slide (slide-5)
     let folderIconsSystem = null;
 
+    // ===== Cursor Flock System (Boids) for START slide =====
+    class CursorFlockSystem {
+        constructor(container) {
+            this.canvas = document.createElement('canvas');
+            this.ctx = this.canvas.getContext('2d');
+            this.container = container;
+            this.boids = [];
+            this.isRunning = false;
+            this.mouse = { x: -1000, y: -1000 };
+
+            this.canvas.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:5;';
+            container.appendChild(this.canvas);
+            this.resize();
+
+            this._onMouse = (e) => {
+                const rect = this.container.getBoundingClientRect();
+                this.mouse.x = e.clientX - rect.left;
+                this.mouse.y = e.clientY - rect.top;
+            };
+
+            window.addEventListener('resize', () => this.resize());
+        }
+
+        resize() {
+            this.canvas.width = this.container.offsetWidth;
+            this.canvas.height = this.container.offsetHeight;
+        }
+
+        start() {
+            if (this.isRunning) return;
+            this.isRunning = true;
+            this.resize();
+
+            const count = 480;
+            this.boids = [];
+            for (let i = 0; i < count; i++) {
+                this.boids.push({
+                    x: Math.random() * this.canvas.width,
+                    y: Math.random() * this.canvas.height,
+                    vx: (Math.random() - 0.5) * 8,
+                    vy: (Math.random() - 0.5) * 8,
+                    size: 10 + Math.random() * 8
+                });
+            }
+
+            document.addEventListener('mousemove', this._onMouse);
+            this.animate();
+        }
+
+        stop() {
+            this.isRunning = false;
+            this.boids = [];
+            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            document.removeEventListener('mousemove', this._onMouse);
+        }
+
+        animate() {
+            if (!this.isRunning) return;
+            const ctx = this.ctx;
+            const w = this.canvas.width;
+            const h = this.canvas.height;
+            ctx.clearRect(0, 0, w, h);
+
+            const boids = this.boids;
+            const mouse = this.mouse;
+            const maxSpeed = 8;
+            const perception = 60;
+
+            for (let i = 0; i < boids.length; i++) {
+                const b = boids[i];
+                let sepX = 0, sepY = 0, sepCount = 0;
+                let aliX = 0, aliY = 0, aliCount = 0;
+                let cohX = 0, cohY = 0, cohCount = 0;
+
+                for (let j = 0; j < boids.length; j++) {
+                    if (i === j) continue;
+                    const o = boids[j];
+                    const dx = o.x - b.x;
+                    const dy = o.y - b.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < perception) {
+                        aliX += o.vx; aliY += o.vy; aliCount++;
+                        cohX += o.x; cohY += o.y; cohCount++;
+                        if (dist < 22) {
+                            sepX -= dx / dist; sepY -= dy / dist; sepCount++;
+                        }
+                    }
+                }
+
+                let ax = 0, ay = 0;
+
+                if (aliCount > 0) {
+                    ax += (aliX / aliCount - b.vx) * 0.06;
+                    ay += (aliY / aliCount - b.vy) * 0.06;
+                }
+                if (cohCount > 0) {
+                    ax += (cohX / cohCount - b.x) * 0.003;
+                    ay += (cohY / cohCount - b.y) * 0.003;
+                }
+                if (sepCount > 0) {
+                    ax += (sepX / sepCount) * 1.0;
+                    ay += (sepY / sepCount) * 1.0;
+                }
+
+                // Mouse attraction
+                const mdx = mouse.x - b.x;
+                const mdy = mouse.y - b.y;
+                const mDist = Math.sqrt(mdx * mdx + mdy * mdy);
+                if (mDist < 500 && mDist > 0) {
+                    ax += (mdx / mDist) * 0.5;
+                    ay += (mdy / mDist) * 0.5;
+                }
+
+                b.vx += ax; b.vy += ay;
+
+                const spd = Math.sqrt(b.vx * b.vx + b.vy * b.vy);
+                if (spd > maxSpeed) {
+                    b.vx = (b.vx / spd) * maxSpeed;
+                    b.vy = (b.vy / spd) * maxSpeed;
+                }
+
+                b.x += b.vx; b.y += b.vy;
+
+                if (b.x < -20) b.x = w + 20;
+                if (b.x > w + 20) b.x = -20;
+                if (b.y < -20) b.y = h + 20;
+                if (b.y > h + 20) b.y = -20;
+
+                // Draw mouse pointer (no rotation - always upright)
+                const s = b.size;
+
+                ctx.save();
+                ctx.translate(b.x, b.y);
+
+                ctx.beginPath();
+                ctx.moveTo(0, 0);
+                ctx.lineTo(0, s * 1.4);
+                ctx.lineTo(s * 0.3, s * 1.05);
+                ctx.lineTo(s * 0.55, s * 1.55);
+                ctx.lineTo(s * 0.75, s * 1.4);
+                ctx.lineTo(s * 0.45, s * 0.9);
+                ctx.lineTo(s * 0.95, s * 0.9);
+                ctx.closePath();
+
+                ctx.fillStyle = 'rgba(255,255,255,0.85)';
+                ctx.fill();
+                ctx.strokeStyle = 'rgba(10,10,10,0.7)';
+                ctx.lineWidth = 1.2;
+                ctx.lineJoin = 'round';
+                ctx.stroke();
+
+                ctx.restore();
+            }
+
+            requestAnimationFrame(() => this.animate());
+        }
+    }
+
+    let cursorFlockSystem = null;
 
     // ===== Enhanced Particle System Template =====
     // Shapes: circle, square, triangle, circleOutline, squareOutline, triangleOutline
@@ -595,7 +755,16 @@ document.addEventListener('DOMContentLoaded', () => {
         'slide-7': { shape: 'circle', physics: 'drift', color: 'white', count: 30, sizeMin: 1, sizeMax: 3 },
         'slide-8': { shape: 'squareOutline', physics: 'float', color: 'white', count: 25, sizeMin: 1, sizeMax: 3 },
         'slide-9': { shape: 'triangle', physics: 'orbit', color: 'white', count: 20, sizeMin: 2, sizeMax: 5 },
-        'slide-10': { shape: 'circle', physics: 'rise', color: 'black', count: 30, sizeMin: 1.5, sizeMax: 4 }
+        'slide-10': { shape: 'squareOutline', physics: 'drift', color: 'yellow', count: 20, sizeMin: 2, sizeMax: 5 },
+        'slide-11': { shape: 'squareOutline', physics: 'float', color: 'white', count: 15, sizeMin: 1, sizeMax: 3 },
+        'slide-12': { shape: 'triangle', physics: 'float', color: 'white', count: 20, sizeMin: 1, sizeMax: 3 },
+        'slide-13': { shape: 'square', physics: 'drift', color: 'yellow', count: 25, sizeMin: 1, sizeMax: 2 },
+        'slide-14': { shape: 'circleOutline', physics: 'rise', color: 'white', count: 30, sizeMin: 2, sizeMax: 5 },
+        'slide-15': { shape: 'circle', physics: 'pulse', color: 'white', count: 15, sizeMin: 1, sizeMax: 3 },
+        'slide-16': { shape: 'triangleOutline', physics: 'orbit', color: 'yellow', count: 20, sizeMin: 2, sizeMax: 5 },
+        'slide-17': { shape: 'circle', physics: 'rise', color: 'white', count: 25, sizeMin: 1.5, sizeMax: 4 },
+        'slide-18': { shape: 'squareOutline', physics: 'float', color: 'white', count: 20, sizeMin: 1, sizeMax: 3 },
+        'slide-19': { shape: 'circle', physics: 'rise', color: 'black', count: 30, sizeMin: 1.5, sizeMax: 4 }
     };
 
     // Create particle system for each slide
@@ -635,6 +804,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     folderIconsSystem.start();
                 }
 
+                // Start cursor flock for START slide (slide-19)
+                if (slideId === 'slide-19') {
+                    if (!cursorFlockSystem) {
+                        cursorFlockSystem = new CursorFlockSystem(entry.target);
+                    }
+                    cursorFlockSystem.start();
+                }
+
                 const slideIndex = Array.from(slides).indexOf(entry.target);
                 updateActiveDot(slideIndex);
 
@@ -651,6 +828,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Stop falling icons when leaving slide-5
                 if (slideId === 'slide-5' && folderIconsSystem) {
                     folderIconsSystem.stop();
+                }
+                // Stop cursor flock when leaving slide-19
+                if (slideId === 'slide-19' && cursorFlockSystem) {
+                    cursorFlockSystem.stop();
                 }
             }
         });
@@ -725,12 +906,30 @@ document.addEventListener('DOMContentLoaded', () => {
         document.documentElement.style.setProperty('--mouse-y', mouseY);
     });
 
+    // ===== Prompt Text Stagger Animation =====
+    const promptObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const texts = entry.target.querySelectorAll('.prompt-text');
+                texts.forEach((text, i) => {
+                    setTimeout(() => {
+                        text.style.opacity = '1';
+                        text.style.transform = 'translateY(0)';
+                    }, i * 150 + 300);
+                });
+            }
+        });
+    }, { threshold: 0.5 });
+
+    const promptSlide = document.getElementById('slide-15');
+    if (promptSlide) promptObserver.observe(promptSlide);
+
     // ===== Initial State =====
     slides[0].classList.add('visible');
     const initialPs = particleSystems.get('slide-0');
     if (initialPs) initialPs.start(particleConfigs['slide-0']);
 
-    console.log('🚀 Portfolio Shift - Enhanced Particle System Loaded');
+    console.log('🚀 Portfolio Shift - 20 Slides Loaded');
     console.log('✨ Shapes: circle, square, triangle + outlines');
     console.log('🎯 Physics: float, gravity, rise, drift, orbit, pulse');
 });
