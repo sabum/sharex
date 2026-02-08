@@ -788,6 +788,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'slide-1': { shape: 'square', physics: 'gravity', color: 'white', count: 40, sizeMin: 1, sizeMax: 3 },
         'slide-2': { shape: 'triangle', physics: 'gravity', color: 'white', count: 50, speed: 0.8, sizeMin: 1, sizeMax: 3 },
         'slide-3': { shape: 'circleOutline', physics: 'rise', color: 'white', count: 35, sizeMin: 2, sizeMax: 6 },
+        'slide-stats': { shape: 'circle', physics: 'rise', color: 'yellow', count: 20, sizeMin: 1.5, sizeMax: 4 },
         'slide-4': { shape: 'squareOutline', physics: 'drift', color: 'white', count: 30, sizeMin: 1, sizeMax: 3, showCoords: true },
         'slide-5': { shape: 'square', physics: 'float', color: 'white', count: 25, sizeMin: 1, sizeMax: 3 },
         'slide-6': { shape: 'triangleOutline', physics: 'pulse', color: 'yellow', count: 20, sizeMin: 3, sizeMax: 7 },
@@ -818,6 +819,27 @@ document.addEventListener('DOMContentLoaded', () => {
         const ps = new ParticleSystem(slide);
         particleSystems.set(slide.id, ps);
     });
+
+    // ===== Stat Counter Animation =====
+    function animateStatCounter(el) {
+        const target = parseFloat(el.dataset.target);
+        const duration = 1500;
+        const start = performance.now();
+        const isFloat = target % 1 !== 0;
+
+        function update(now) {
+            const elapsed = now - start;
+            const progress = Math.min(elapsed / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            const current = target * eased;
+
+            el.textContent = isFloat ? current.toFixed(1) : Math.round(current);
+
+            if (progress < 1) requestAnimationFrame(update);
+        }
+
+        requestAnimationFrame(update);
+    }
 
     // ===== Intersection Observer =====
     const observerOptions = {
@@ -856,6 +878,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     cursorFlockSystem.start();
                 }
 
+                // Start stat counter animation for stats slide
+                if (slideId === 'slide-stats') {
+                    entry.target.querySelectorAll('.stat-number').forEach(el => animateStatCounter(el));
+                }
+
                 // Start tick/slot animations only when their slide is visible
                 entry.target.querySelectorAll('.tick-text').forEach(el => startTickText(el));
                 entry.target.querySelectorAll('.slot-number').forEach(el => startSlotNumber(el));
@@ -883,6 +910,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Stop cursor flock when leaving slide-24
                 if (slideId === 'slide-24' && cursorFlockSystem) {
                     cursorFlockSystem.stop();
+                }
+                // Reset stat counters when leaving
+                if (slideId === 'slide-stats') {
+                    entry.target.querySelectorAll('.stat-number').forEach(el => {
+                        el.textContent = '0';
+                    });
                 }
                 // Stop tick/slot animations when slide leaves view
                 entry.target.querySelectorAll('.tick-text').forEach(el => stopTickText(el));
