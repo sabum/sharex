@@ -44,6 +44,7 @@ html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
 }
 
 body {
@@ -68,6 +69,7 @@ a {
     max-width: var(--container);
     margin: 0 auto;
     padding: 0 var(--gap);
+    overflow-x: hidden;
 }
 
 /* --- Reveal Animation --- */
@@ -1256,6 +1258,11 @@ a {
 
 .g-col-sticky {
     position: relative;
+    min-width: 0;
+}
+
+.g-col-scroll {
+    min-width: 0;
 }
 
 .g-sticky-block {
@@ -1642,6 +1649,17 @@ a {
 }
 
 @media (max-width: 768px) {
+    /* --- Global --- */
+    body {
+        word-break: keep-all;
+        overflow-wrap: break-word;
+    }
+
+    :root {
+        --section-gap: clamp(48px, 8vh, 80px);
+    }
+
+    /* --- Header --- */
     .g-header {
         height: 56px;
     }
@@ -1654,12 +1672,23 @@ a {
         display: none;
     }
 
+    /* --- Hero --- */
     .g-hero {
+        min-height: auto;
         padding: 100px 20px 60px;
     }
 
     .g-hero-title {
         font-size: clamp(48px, 14vw, 80px);
+    }
+
+    .g-hero-sub {
+        font-size: 16px;
+        margin-bottom: 24px;
+    }
+
+    .g-hero-meta {
+        margin-bottom: 48px;
     }
 
     .g-hero-chapters {
@@ -1671,6 +1700,25 @@ a {
         grid-column: span 2;
     }
 
+    .g-chapter-card {
+        padding: 16px 14px;
+    }
+
+    .g-chapter-desc {
+        font-size: 11px;
+    }
+
+    /* --- Section Hero --- */
+    .g-section-hero {
+        min-height: 50vh;
+        padding: 80px 20px 60px;
+    }
+
+    .g-section-desc {
+        font-size: 16px;
+    }
+
+    /* --- Compare --- */
     .g-compare {
         grid-template-columns: 1fr;
     }
@@ -1678,6 +1726,14 @@ a {
     .g-compare-before,
     .g-compare-after {
         padding: 32px 0;
+    }
+
+    .g-compare-before {
+        padding-right: 0;
+    }
+
+    .g-compare-after {
+        padding-left: 0;
     }
 
     .g-compare-divider {
@@ -1689,10 +1745,25 @@ a {
         padding: 0 12px;
     }
 
-    .g-stats {
-        grid-template-columns: 1fr;
+    .g-compare-title {
+        font-size: 18px;
     }
 
+    .g-compare-list {
+        gap: 20px;
+    }
+
+    /* --- Stats --- */
+    .g-stats {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .g-stat {
+        padding: 32px 20px;
+    }
+
+    /* --- Reference List --- */
     .g-ref-item {
         flex-direction: column;
         gap: 8px;
@@ -1700,16 +1771,29 @@ a {
 
     .g-ref-name {
         min-width: unset;
+        font-size: 16px;
     }
 
+    .g-ref-desc {
+        font-size: 13px;
+    }
+
+    /* --- Ref Grid --- */
     .g-ref-grid {
         grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
     }
 
+    .g-ref-card {
+        padding: 16px 14px;
+    }
+
+    /* --- Resource Grid --- */
     .g-resource-grid {
         grid-template-columns: 1fr;
     }
 
+    /* --- Process Flow --- */
     .g-process-flow {
         flex-wrap: wrap;
         gap: 8px;
@@ -1722,28 +1806,47 @@ a {
     .g-flow-step {
         flex: 1 1 calc(50% - 4px);
         min-width: 0;
+        padding: 20px 10px;
     }
 
+    .g-flow-text {
+        font-size: 13px;
+    }
+
+    .g-flow-sub {
+        font-size: 10px;
+    }
+
+    /* --- Prompt Compare --- */
     .g-prompt-compare {
         grid-template-columns: 1fr;
     }
 
+    /* --- Git Compare --- */
     .g-git-compare {
         grid-template-columns: 1fr;
     }
 
+    /* --- Anatomy --- */
     .g-anatomy-row {
         grid-template-columns: 32px 1fr;
+    }
+
+    .g-anatomy-name {
+        font-size: 16px;
     }
 
     .g-anatomy-detail {
         grid-column: 1 / -1;
         padding-left: 48px;
+        font-size: 13px;
     }
 
+    /* --- Two Column --- */
     .g-two-col {
         grid-template-columns: 1fr;
         gap: 40px;
+        overflow-x: hidden;
     }
 
     .g-col-sticky {
@@ -1755,8 +1858,176 @@ a {
         top: auto;
     }
 
+    .g-content-title {
+        font-size: 20px;
+    }
+
+    .g-content-text {
+        font-size: 14px;
+    }
+
+    /* --- Chapter Hero --- */
+    .g-chapter-hero {
+        min-height: 60vh;
+        padding: 100px 20px 60px;
+    }
+
     .g-chapter-title {
         font-size: clamp(48px, 16vw, 100px);
+    }
+
+    .g-chapter-sub {
+        font-size: 16px;
+    }
+
+    /* --- Code Block --- */
+    .g-code {
+        padding: 16px;
+        font-size: 12px;
+        line-height: 1.7;
+    }
+
+    .g-code-filename {
+        font-size: 11px;
+    }
+
+    /* --- Checklist --- */
+    .g-check-header {
+        padding: 14px 16px;
+    }
+
+    .g-check-header strong {
+        font-size: 14px;
+    }
+
+    .g-check-detail {
+        padding: 0 16px 0 44px;
+    }
+
+    .g-check-item.expanded .g-check-detail {
+        padding: 0 16px 16px 44px;
+    }
+
+    .g-check-detail p {
+        font-size: 13px;
+    }
+
+    .g-check-detail li {
+        font-size: 12px;
+    }
+
+    /* --- Watchout --- */
+    .g-watchout-content strong {
+        font-size: 13px;
+    }
+
+    .g-watchout-content p {
+        font-size: 12px;
+    }
+
+    /* --- Process Steps --- */
+    .g-process-content strong {
+        font-size: 14px;
+    }
+
+    .g-process-content p {
+        font-size: 13px;
+    }
+
+    /* --- Next Chapter --- */
+    .g-next-link {
+        padding: 20px 16px;
+    }
+
+    .g-next-num {
+        font-size: 28px;
+    }
+
+    .g-next-name {
+        font-size: 14px;
+    }
+
+    /* --- Subtitle --- */
+    .g-subtitle {
+        font-size: 22px;
+    }
+
+    /* --- Footer --- */
+    .g-footer {
+        padding: 48px 0;
+    }
+
+    /* --- Geo Elements (reduce on mobile) --- */
+    .g-geo-circle--hero,
+    .g-geo-clone {
+        width: 60vw;
+        height: 60vw;
+    }
+}
+
+/* ===== SMALL MOBILE ===== */
+@media (max-width: 480px) {
+    .g-hero-chapters {
+        grid-template-columns: 1fr;
+    }
+
+    .g-hero-chapters .g-chapter-card:last-child {
+        grid-column: span 1;
+    }
+
+    .g-ref-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .g-ref-grid--2col {
+        grid-template-columns: 1fr;
+    }
+
+    .g-flow-step {
+        flex: 1 1 100%;
+    }
+
+    .g-anatomy-detail {
+        padding-left: 0;
+        margin-top: 4px;
+    }
+
+    .g-anatomy-row {
+        grid-template-columns: 32px 1fr;
+        gap: 8px;
+    }
+
+    .g-hero-title {
+        font-size: clamp(40px, 14vw, 64px);
+    }
+
+    .g-chapter-title {
+        font-size: clamp(40px, 14vw, 80px);
+    }
+
+    .g-section-title {
+        font-size: clamp(28px, 8vw, 48px);
+    }
+
+    .g-stat {
+        padding: 24px 16px;
+    }
+
+    .g-stat-number {
+        font-size: 48px;
+    }
+
+    .g-check-detail {
+        padding: 0 12px 0 36px;
+    }
+
+    .g-check-item.expanded .g-check-detail {
+        padding: 0 12px 14px 36px;
+    }
+
+    .g-code-inline code {
+        font-size: 12px;
+        padding: 10px 12px;
     }
 }
 
