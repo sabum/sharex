@@ -373,6 +373,10 @@ body {
     opacity: 0.5;
 }
 
+.bg-video--zoomed {
+    transform: scale(2) translateY(10%);
+}
+
 .bg-overlay {
     position: absolute;
     top: 0;
@@ -2129,24 +2133,40 @@ body {
 
     .deploy-flow {
         flex-direction: column;
-        gap: 16px;
+        gap: min(12px, 1.5vh);
+        padding: 0 24px;
+    }
+
+    .deploy-step {
+        gap: min(16px, 2vh);
     }
 
     .deploy-connector {
         width: 2px;
-        height: 40px;
+        height: min(28px, 3.5vh);
         margin-bottom: 0;
     }
 
     .deploy-circle {
-        width: 180px;
-        height: 180px;
+        width: min(140px, 16vh);
+        height: min(140px, 16vh);
+    }
+
+    .deploy-desc {
+        font-size: 14px;
+        max-width: 180px;
     }
 
     .git-explain {
         flex-direction: column;
+        align-items: flex-start;
         padding: 40px 24px 80px;
         gap: 32px;
+    }
+
+    .git-col {
+        text-align: left;
+        width: 100%;
     }
 
     .git-title {
@@ -2331,11 +2351,7 @@ body {
         font-size: 14px;
     }
 
-    /* --- Deploy circles smaller --- */
-    .deploy-circle {
-        width: 140px;
-        height: 140px;
-    }
+    /* deploy-circle sizing moved to consolidated block above */
 
     /* --- Slide bottom spacing --- */
     .slide-bottom {

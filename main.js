@@ -856,6 +856,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
 
+                // Play video only when slide is visible
+                const video = entry.target.querySelector('.bg-video');
+                if (video) video.play().catch(() => {});
+
                 // Start particles with slide-specific config
                 if (ps) {
                     const config = particleConfigs[slideId] || { shape: 'circle', physics: 'float', color: 'white' };
@@ -917,6 +921,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         el.textContent = '0';
                     });
                 }
+                // Pause video when slide leaves view
+                const videoOut = entry.target.querySelector('.bg-video');
+                if (videoOut) videoOut.pause();
+
                 // Stop tick/slot animations when slide leaves view
                 entry.target.querySelectorAll('.tick-text').forEach(el => stopTickText(el));
                 entry.target.querySelectorAll('.slot-number').forEach(el => stopSlotNumber(el));

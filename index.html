@@ -10,15 +10,12 @@
     <meta property="og:description" content="문서에서 웹으로, 중력을 거슬러라">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://sabum.github.io/sharex/">
+    <meta property="og:image" content="https://sabum.github.io/sharex/img/og-image.png">
     <link rel="icon"
         href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap"
-        rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Inter:wght@400;500;600&family=Noto+Serif+KR:wght@700;900&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
         rel="stylesheet">
     <link rel="stylesheet" href="style.css">
@@ -27,38 +24,38 @@
 <body>
     <!-- Navigation Dots -->
     <nav class="nav-dots" aria-label="슬라이드 네비게이션">
-        <button class="dot active" data-slide="0"></button>
-        <button class="dot" data-slide="1"></button>
-        <button class="dot" data-slide="2"></button>
-        <button class="dot" data-slide="3"></button>
-        <button class="dot" data-slide="stats"></button>
+        <button class="dot active" data-slide="0" aria-label="Title"></button>
+        <button class="dot" data-slide="1" aria-label="Problem"></button>
+        <button class="dot" data-slide="2" aria-label="Gravity"></button>
+        <button class="dot" data-slide="3" aria-label="Antigravity"></button>
+        <button class="dot" data-slide="stats" aria-label="Stats"></button>
         <span class="dot-divider"></span>
-        프로세스 <button class="dot" data-slide="4"></button>
-        <button class="dot" data-slide="5"></button>
-        <button class="dot" data-slide="6"></button>
+        <button class="dot" data-slide="4" aria-label="Data First"></button>
+        <button class="dot" data-slide="5" aria-label="Folder"></button>
+        <button class="dot" data-slide="6" aria-label="Collect"></button>
         <span class="dot-divider"></span>
-        <button class="dot" data-slide="7"></button>
-        <button class="dot" data-slide="8"></button>
-        <button class="dot" data-slide="9"></button>
+        <button class="dot" data-slide="7" aria-label="Reference"></button>
+        <button class="dot" data-slide="8" aria-label="Sites"></button>
+        <button class="dot" data-slide="9" aria-label="How to Use"></button>
         <span class="dot-divider"></span>
-        <button class="dot" data-slide="10"></button>
-        <button class="dot" data-slide="11"></button>
-        <button class="dot" data-slide="12"></button>
+        <button class="dot" data-slide="10" aria-label="Structure"></button>
+        <button class="dot" data-slide="11" aria-label="Anatomy"></button>
+        <button class="dot" data-slide="12" aria-label="Before/After"></button>
         <span class="dot-divider"></span>
-        <button class="dot" data-slide="13"></button>
-        <button class="dot" data-slide="14"></button>
-        <button class="dot" data-slide="15"></button>
-        <button class="dot" data-slide="16"></button>
-        <button class="dot" data-slide="17"></button>
-        <button class="dot" data-slide="18"></button>
+        <button class="dot" data-slide="13" aria-label="Vibe Coding"></button>
+        <button class="dot" data-slide="14" aria-label="Tools"></button>
+        <button class="dot" data-slide="15" aria-label="Process"></button>
+        <button class="dot" data-slide="16" aria-label="Plan First"></button>
+        <button class="dot" data-slide="17" aria-label="Prompt Tips"></button>
+        <button class="dot" data-slide="18" aria-label="AI Image"></button>
         <span class="dot-divider"></span>
-        <button class="dot" data-slide="19"></button>
-        <button class="dot" data-slide="20"></button>
-        <button class="dot" data-slide="21"></button>
-        <button class="dot" data-slide="22"></button>
-        <button class="dot" data-slide="23"></button>
+        <button class="dot" data-slide="19" aria-label="Watch Out"></button>
+        <button class="dot" data-slide="20" aria-label="Publish"></button>
+        <button class="dot" data-slide="21" aria-label="Deploy"></button>
+        <button class="dot" data-slide="22" aria-label="Git & GitHub"></button>
+        <button class="dot" data-slide="23" aria-label="Update"></button>
         <span class="dot-divider"></span>
-        <button class="dot" data-slide="24"></button>
+        <button class="dot" data-slide="24" aria-label="Start"></button>
     </nav>
 
     <!-- Slide Container -->
@@ -119,7 +116,7 @@
 
         <!-- Slide 02: Problem - Solid Black -->
         <section class="slide slide-dark" id="slide-1">
-            <video class="bg-video" autoplay muted loop playsinline>
+            <video class="bg-video" muted loop playsinline preload="none">
                 <source src="img/bg_02_problem.mp4" type="video/mp4">
             </video>
             <div class="slide-center">
@@ -135,7 +132,7 @@
 
         <!-- Slide 03: Gravity - Solid Black -->
         <section class="slide slide-dark" id="slide-2">
-            <video class="bg-video" autoplay muted loop playsinline>
+            <video class="bg-video" muted loop playsinline preload="none">
                 <source src="img/bg_03_gravity.mp4" type="video/mp4">
             </video>
             <div class="slide-center">
@@ -150,7 +147,7 @@
 
         <!-- Slide 04: Antigravity - With Background Video -->
         <section class="slide slide-with-bg slide-dark" id="slide-3">
-            <video class="bg-video" autoplay muted loop playsinline>
+            <video class="bg-video" muted loop playsinline preload="none">
                 <source src="img/bg_04_antigravity.mp4" type="video/mp4">
             </video>
             <div class="bg-overlay bg-overlay--dark"></div>
@@ -167,7 +164,7 @@
 
         <!-- Slide: Stats - 채용 데이터 -->
         <section class="slide slide-dark slide-with-bg" id="slide-stats">
-            <video class="bg-video" autoplay muted loop playsinline>
+            <video class="bg-video" muted loop playsinline preload="none">
                 <source src="img/_it__1080p_202602081432.mp4" type="video/mp4">
             </video>
             <div class="bg-overlay bg-overlay--dark"></div>
@@ -193,7 +190,7 @@
 
         <!-- Slide 05: Data First Title - Solid Black -->
         <section class="slide slide-dark slide-with-bg" id="slide-4">
-            <video class="bg-video" autoplay muted loop playsinline>
+            <video class="bg-video" muted loop playsinline preload="none">
                 <source src="img/bg_12_datafirst.mp4" type="video/mp4">
             </video>
             <div class="slide-center">
@@ -210,7 +207,7 @@
 
         <!-- Slide 06: Folder - With Background Video -->
         <section class="slide slide-dark slide-with-bg" id="slide-5">
-            <video class="bg-video" autoplay muted loop playsinline>
+            <video class="bg-video" muted loop playsinline preload="none">
                 <source src="img/bg_05_folder.mp4" type="video/mp4">
             </video>
             <div class="slide-center">
@@ -227,7 +224,7 @@
 
         <!-- Slide 07: What to Collect - Process Flow -->
         <section class="slide slide-dark slide-with-bg" id="slide-6">
-            <video class="bg-video" autoplay muted loop playsinline>
+            <video class="bg-video" muted loop playsinline preload="none">
                 <source src="img/bg_08_reference_use.mp4" type="video/mp4">
             </video>
             <div class="slide-center">
@@ -287,7 +284,7 @@
 
         <!-- Slide 08: Visual Reference Title - With Background Video -->
         <section class="slide slide-dark slide-with-bg" id="slide-7">
-            <video class="bg-video" autoplay muted loop playsinline>
+            <video class="bg-video" muted loop playsinline preload="none">
                 <source src="img/bg_06_reference.mp4" type="video/mp4">
             </video>
             <div class="slide-center">
@@ -306,7 +303,7 @@
         <section class="slide slide-dark" id="slide-8">
             <div class="ref-grid fade-in">
                 <!-- Row 1 -->
-                <a href="https://pinterest.com" target="_blank" class="ref-card">
+                <a href="https://pinterest.com" target="_blank" rel="noopener" class="ref-card">
                     <div class="ref-logo">
                         <img src="https://cdn.simpleicons.org/pinterest/white" alt="Pinterest">
                     </div>
@@ -314,7 +311,7 @@
                     <span class="ref-desc">무드보드 & 영감</span>
                     <span class="ref-url">pinterest.com</span>
                 </a>
-                <a href="https://dribbble.com" target="_blank" class="ref-card">
+                <a href="https://dribbble.com" target="_blank" rel="noopener" class="ref-card">
                     <div class="ref-logo">
                         <img src="https://cdn.simpleicons.org/dribbble/white" alt="Dribbble">
                     </div>
@@ -322,7 +319,7 @@
                     <span class="ref-desc">UI/UX 트렌드</span>
                     <span class="ref-url">dribbble.com</span>
                 </a>
-                <a href="https://behance.net" target="_blank" class="ref-card">
+                <a href="https://behance.net" target="_blank" rel="noopener" class="ref-card">
                     <div class="ref-logo">
                         <img src="https://cdn.simpleicons.org/behance/white" alt="Behance">
                     </div>
@@ -330,7 +327,7 @@
                     <span class="ref-desc">케이스 스터디</span>
                     <span class="ref-url">behance.net</span>
                 </a>
-                <a href="https://awwwards.com" target="_blank" class="ref-card">
+                <a href="https://awwwards.com" target="_blank" rel="noopener" class="ref-card">
                     <div class="ref-logo">
                         <img src="https://cdn.simpleicons.org/awwwards/white" alt="Awwwards">
                     </div>
@@ -339,7 +336,7 @@
                     <span class="ref-url">awwwards.com</span>
                 </a>
                 <!-- Row 2 -->
-                <a href="https://mobbin.com" target="_blank" class="ref-card">
+                <a href="https://mobbin.com" target="_blank" rel="noopener" class="ref-card">
                     <div class="ref-logo">
                         <img src="https://cdn.simpleicons.org/mobbin/white" alt="Mobbin">
                     </div>
@@ -347,7 +344,7 @@
                     <span class="ref-desc">모바일 앱 UI</span>
                     <span class="ref-url">mobbin.com</span>
                 </a>
-                <a href="https://figma.com/community" target="_blank" class="ref-card">
+                <a href="https://figma.com/community" target="_blank" rel="noopener" class="ref-card">
                     <div class="ref-logo">
                         <img src="https://cdn.simpleicons.org/figma/white" alt="Figma">
                     </div>
@@ -355,7 +352,7 @@
                     <span class="ref-desc">커뮤니티 템플릿</span>
                     <span class="ref-url">figma.com/community</span>
                 </a>
-                <a href="https://unsplash.com" target="_blank" class="ref-card">
+                <a href="https://unsplash.com" target="_blank" rel="noopener" class="ref-card">
                     <div class="ref-logo">
                         <img src="https://cdn.simpleicons.org/unsplash/white" alt="Unsplash">
                     </div>
@@ -363,7 +360,7 @@
                     <span class="ref-desc">고퀄리티 이미지</span>
                     <span class="ref-url">unsplash.com</span>
                 </a>
-                <a href="https://collectui.com" target="_blank" class="ref-card">
+                <a href="https://collectui.com" target="_blank" rel="noopener" class="ref-card">
                     <div class="ref-logo">
                         <img src="https://cdn.simpleicons.org/googlefonts/white" alt="Collect UI">
                     </div>
@@ -436,7 +433,7 @@
 
         <!-- Slide 11: Structure Title -->
         <section class="slide slide-dark slide-with-bg" id="slide-10">
-            <video class="bg-video" autoplay muted loop playsinline>
+            <video class="bg-video" muted loop playsinline preload="none">
                 <source src="img/bg_07_structure.mp4" type="video/mp4">
             </video>
             <div class="bg-overlay bg-overlay--dark"></div>
@@ -454,7 +451,7 @@
 
         <!-- Slide 12: Portfolio Anatomy - With Background Video -->
         <section class="slide slide-dark slide-with-bg" id="slide-11">
-            <video class="bg-video" autoplay muted loop playsinline>
+            <video class="bg-video" muted loop playsinline preload="none">
                 <source src="img/bg_09_anatomy.mp4" type="video/mp4">
             </video>
             <div class="typo-anatomy fade-in">
@@ -526,7 +523,7 @@
 
         <!-- Slide 14: Vibe Coding Title -->
         <section class="slide slide-dark slide-with-bg" id="slide-13">
-            <video class="bg-video" autoplay muted loop playsinline>
+            <video class="bg-video" muted loop playsinline preload="none">
                 <source src="img/bg_08_vibecoding.mp4" type="video/mp4">
             </video>
             <div class="bg-overlay bg-overlay--dark"></div>
@@ -545,7 +542,7 @@
 
         <!-- Slide 15: YOUR TOOLS -->
         <section class="slide slide-dark slide-with-bg" id="slide-14">
-            <video class="bg-video" autoplay muted loop playsinline>
+            <video class="bg-video" muted loop playsinline preload="none">
                 <source src="img/bg_15_tools.mp4" type="video/mp4">
             </video>
             <div class="slide-center">
@@ -571,7 +568,7 @@
 
         <!-- Slide 16: Process Flow -->
         <section class="slide slide-dark slide-with-bg" id="slide-15">
-            <video class="bg-video" autoplay muted loop playsinline>
+            <video class="bg-video" muted loop playsinline preload="none">
                 <source src="img/bg_10_process.mp4" type="video/mp4">
             </video>
             <div class="bg-overlay bg-overlay--dark"></div>
@@ -628,9 +625,9 @@
             </footer>
         </section>
 
-        <!-- Slide 16: Plan First - PRD in Markdown -->
+        <!-- Slide 17: Plan First - PRD in Markdown -->
         <section class="slide slide-dark slide-with-bg" id="slide-16">
-            <video class="bg-video" autoplay muted loop playsinline>
+            <video class="bg-video" muted loop playsinline preload="none">
                 <source src="img/bg_11_planfirst.mp4" type="video/mp4">
             </video>
             <div class="slide-center">
@@ -676,9 +673,9 @@
             </footer>
         </section>
 
-        <!-- Slide 19: AI IMAGE -->
+        <!-- Slide 19: AI Image -->
         <section class="slide slide-dark slide-with-bg" id="slide-18">
-            <video class="bg-video" autoplay muted loop playsinline style="transform: scale(2) translateY(10%)">
+            <video class="bg-video bg-video--zoomed" muted loop playsinline preload="none">
                 <source src="img/bg_13_aiimage.mp4" type="video/mp4">
             </video>
             <div class="slide-center">
@@ -706,7 +703,7 @@
 
         <!-- Slide 20: WATCH OUT -->
         <section class="slide slide-dark slide-with-bg" id="slide-19">
-            <video class="bg-video" autoplay muted loop playsinline>
+            <video class="bg-video" muted loop playsinline preload="none">
                 <source src="img/bg_14_watchout.mp4" type="video/mp4">
             </video>
             <div class="slide-center">
@@ -736,7 +733,7 @@
 
         <!-- Slide 21: Publish Title -->
         <section class="slide slide-dark slide-with-bg" id="slide-20">
-            <video class="bg-video" autoplay muted loop playsinline>
+            <video class="bg-video" muted loop playsinline preload="none">
                 <source src="img/bg_09_publish.mp4" type="video/mp4">
             </video>
             <div class="bg-overlay bg-overlay--dark"></div>
@@ -752,7 +749,7 @@
             </footer>
         </section>
 
-        <!-- Slide 19: Deploy 3 Steps -->
+        <!-- Slide 22: Deploy 3 Steps -->
         <section class="slide slide-dark" id="slide-21">
             <div class="slide-center">
                 <div class="deploy-flow fade-in">
@@ -843,7 +840,7 @@
 
         <!-- Slide 24: UPDATE & MAINTAIN -->
         <section class="slide slide-dark slide-with-bg" id="slide-23">
-            <video class="bg-video" autoplay muted loop playsinline>
+            <video class="bg-video" muted loop playsinline preload="none">
                 <source src="img/bg_16_update.mp4" type="video/mp4">
             </video>
             <div class="slide-center">
