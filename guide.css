@@ -1604,6 +1604,146 @@ a {
     border-top: 1px solid var(--gray-1);
 }
 
+/* ===== DOWNLOADS ===== */
+.g-download-section {
+    padding: 120px 0;
+    border-top: 1px solid var(--gray-1);
+}
+
+.g-download-explain {
+    margin-top: 48px;
+}
+
+.g-download-explain-block {
+    padding: 32px;
+    border: 1px solid var(--gray-1);
+}
+
+.g-download-explain-block .g-block-title {
+    margin-bottom: 16px;
+}
+
+.g-download-explain-text {
+    font-size: 15px;
+    color: var(--gray-4);
+    line-height: 1.8;
+    margin-bottom: 24px;
+}
+
+.g-download-compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.g-download-compare-col {
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--gray-1);
+}
+
+.g-download-compare-label {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--yellow);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 12px;
+}
+
+.g-download-compare-col p {
+    font-size: 13px;
+    color: var(--gray-3);
+    line-height: 1.8;
+}
+
+.g-download-compare-col code {
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 12px;
+    color: var(--yellow);
+    background: rgba(255, 214, 0, 0.08);
+    padding: 1px 5px;
+    border-radius: 3px;
+}
+
+.g-download-explain-tip {
+    font-size: 14px;
+    color: var(--gray-3);
+    padding-top: 16px;
+    border-top: 1px solid var(--gray-1);
+}
+
+.g-download-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    margin-top: 48px;
+}
+
+.g-download-group-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--yellow);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 16px;
+}
+
+.g-download-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 12px;
+}
+
+.g-download-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px;
+    border: 1px solid var(--gray-1);
+    text-decoration: none;
+    transition: all 0.3s var(--ease-out);
+}
+
+.g-download-card:hover {
+    border-color: var(--yellow);
+    background: var(--yellow-glow);
+}
+
+.g-download-icon {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--yellow);
+    border: 1px solid var(--gray-1);
+}
+
+.g-download-card:hover .g-download-icon {
+    border-color: var(--yellow);
+}
+
+.g-download-info strong {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 4px;
+}
+
+.g-download-info p {
+    font-size: 12px;
+    color: var(--gray-3);
+    letter-spacing: -0.02em;
+}
+
 /* ===== FOOTER ===== */
 .g-footer {
     padding: 80px 0;
@@ -1957,6 +2097,23 @@ a {
     /* --- Subtitle --- */
     .g-subtitle {
         font-size: 22px;
+    }
+
+    /* --- Downloads --- */
+    .g-download-section {
+        padding: 80px 0;
+    }
+
+    .g-download-explain-block {
+        padding: 24px;
+    }
+
+    .g-download-compare {
+        grid-template-columns: 1fr;
+    }
+
+    .g-download-cards {
+        grid-template-columns: 1fr;
     }
 
     /* --- Footer --- */
